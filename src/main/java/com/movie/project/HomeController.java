@@ -17,11 +17,32 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
+		System.out.println(session.selectOne("signUp.test").toString());
 		return "Main";
 	}
 	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping("/headline")
+	public String headline() {
+		return "headline";
+	}
+	
+	@GetMapping("/list")
+	public String list() {
+		return "list";
+	}
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "insert";
+	}
+	
+	@GetMapping("/MovieInfo")
+	public String MovieInfo() {
+		return "MovieInfo";
 	}
 }

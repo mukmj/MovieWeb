@@ -83,7 +83,6 @@ a{
     right:0;
     position:absolute;
     text-align:left;
-    
 }
 
 .right-log{right:50px !important;}
@@ -113,7 +112,7 @@ a{
     outline: none;
 }
 
-.login-show input[type="button"] {
+.login-show input[type="button"], .login-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background: #444444;
@@ -140,17 +139,16 @@ a{
 .register-id{
     width: calc(100% - 90px);
     display: inline;
-    margin-bottom: 0;
-    margin-top: 15px;
+	margin: 20px 0;
 }
 
 .register-text{
     width: 100%;
     display: block;
-    margin:20px 0;
+    margin: 20px 0;
 }
 
-.register-show input[type="button"] {
+.register-show input[type="button"], .register-show input[type="submit"] {
     max-width: 150px;
     width: 100%;
     background: #444444;

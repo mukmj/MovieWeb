@@ -5,34 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-    <link rel="stylesheet" href="../resources/css/test.css">
+    <link rel="stylesheet" href="/resources/css/login.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/resources/js/login.js"></script>
     <script>
         $(document).ready(function(){
-            $('.login-info-box').fadeOut();
-            $('.login-show').addClass('show-log-panel');
-
-            $('.login-reg-panel input[type="radio"]').on('change', function() {
-                if($('#log-login-show').is(':checked')) {
-                    $('.register-info-box').fadeOut(); 
-                    $('.login-info-box').fadeIn();
-
-                    $('.white-panel').addClass('right-log');
-                    $('.register-show').addClass('show-log-panel');
-                    $('.login-show').removeClass('show-log-panel');
-                } else if($('#log-reg-show').is(':checked')) {
-                $('.register-info-box').fadeIn();
-                $('.login-info-box').fadeOut();
-
-                $('.white-panel').removeClass('right-log');
-
-                $('.login-show').addClass('show-log-panel');
-                $('.register-show').removeClass('show-log-panel');
-                }
-            });
-            
             $('#login').click(function (){
             	location.href = "/";
             });
@@ -61,14 +42,18 @@
 				<input type="button" id="login" value="Login">
 				<a href="">아이디 찾기</a>
 			</div>
-			<div class="register-show">
-				<h2>Sign Up</h2>
-				<input type="text" class="register-id" placeholder="Id">
-                <button type="button" id="idCheck-button">중복확인</button>
-				<input type="password" class="register-text" placeholder="Password">
-				<input type="text" class="register-text" placeholder="Email">
-				<input type="button" value="가입">
-			</div>
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="register-show">
+					<h2>Sign Up</h2>
+					<input type="text" class="register-id" placeholder="Email">
+	                <button type="button" id="idCheck-button">중복확인</button>
+					<input type="password" class="register-text" placeholder="Password">
+					<input type="text" class="register-id" placeholder="Nickname">
+	                <button type="button" id="idCheck-button">중복확인</button>
+	                <input type="file" multiple="multiple">
+					<input type="submit" value="가입" style="margin-top: 20px;">
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
