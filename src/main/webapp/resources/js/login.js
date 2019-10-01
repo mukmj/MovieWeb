@@ -20,4 +20,9 @@ $(document).ready(function(){
         $('.register-show').removeClass('show-log-panel');
         }
     });
+    
+    $('#profileUp').click(function(e){
+    	$('#profileImg').click();
+    	e.preventDefault();
+    });
 });

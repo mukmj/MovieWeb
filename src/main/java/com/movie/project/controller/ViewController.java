@@ -1,4 +1,4 @@
-package com.movie.project;
+package com.movie.project.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class HomeController {
-	@Autowired
-	SqlSession session;
-	
+public class ViewController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
-		System.out.println(session.selectOne("signUp.test").toString());
 		return "Main";
 	}
 	
