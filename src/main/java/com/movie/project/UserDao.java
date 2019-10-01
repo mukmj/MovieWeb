@@ -12,7 +12,14 @@ public class UserDao {
 	SqlSession session;
 	
 	public void SignUpDao(SignUpBean sb) {
-		System.out.println(sb.getEmail().toString());
 		session.insert("signUp.insert", sb);
+	}
+	
+	public String idCheck(String id) {
+		return session.selectOne("signUp.idCheck", id);
+	}
+	
+	public String nickCheck(String nickname) {
+		return session.selectOne("signUp.nickCheck", nickname);
 	}
 }

@@ -161,7 +161,7 @@ a{
     cursor:pointer;
 }
 
-#idCheck-button {
+.idCheck-button {
     margin-left: 5px;
     width: 80px;
     height: 56px;

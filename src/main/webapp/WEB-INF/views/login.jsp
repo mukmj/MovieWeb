@@ -37,7 +37,7 @@
 		<div class="white-panel">
 			<div class="login-show">
 				<h2>LOGIN</h2>
-				<input type="text" placeholder="Email">
+				<input type="text" placeholder="id">
 				<input type="password" placeholder="Password">
 				<input type="button" id="login" value="Login">
 				<a href="">아이디 찾기</a>
@@ -45,14 +45,14 @@
 			<form action="/signUp" method="post" enctype="multipart/form-data">
 				<div class="register-show">
 					<h2>Sign Up</h2>
-					<input type="text" class="register-id" name="email" placeholder="Email">
-	                <button type="button" id="idCheck-button">중복확인</button>
+					<input type="text" class="register-id" name="id" id="id" placeholder="id">
+	                <button type="button" class="idCheck-button" id="idCheck">중복확인</button>
 					<input type="password" class="register-text" name="password" placeholder="Password">
-					<input type="text" class="register-id" name="nickname" placeholder="Nickname">
-	                <button type="button" id="idCheck-button">중복확인</button>
+					<input type="text" class="register-id" name="nickname" id="nickname" placeholder="Nickname">
+	                <button type="button" class="idCheck-button" id="nickNameCheck">중복확인</button>
 	           		<div class="upload-Box">
 	               		<div class="profile-Img-Box">
-							<img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png">
+							<img id="ProImg">
 					   	</div>
 						<input type="file" id="profileImg" name="profileImg" style="display: none;">	
 						<button type="button" id="profileUp">업로드</button>           

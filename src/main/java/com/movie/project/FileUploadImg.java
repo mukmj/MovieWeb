@@ -15,7 +15,7 @@ public class FileUploadImg {
 				String originalFileName = file.getOriginalFilename();
 				String ext = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());
 				String fileName = UUID.randomUUID().toString();
-				allPath = path + fileName + ext;
+				allPath = fileName + ext;
 				
 				byte data[] = file.getBytes();
 				
@@ -24,7 +24,7 @@ public class FileUploadImg {
 					f.mkdirs();
 				}
 				
-				OutputStream os = new FileOutputStream(new File(allPath));
+				OutputStream os = new FileOutputStream(new File(path + fileName + ext));
 				os.write(data);
 				os.close();
 			}
