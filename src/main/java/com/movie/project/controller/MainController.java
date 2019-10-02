@@ -1,9 +1,11 @@
 package com.movie.project.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.movie.project.FileUploadImg;
 import com.movie.project.UserDao;
+import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.SignUpBean;
 
 @Controller
@@ -50,11 +53,11 @@ public class MainController {
 	
 	@RequestMapping("/idCheck")
 	public void idCheck(HttpServletRequest req,HttpServletResponse res) throws IOException {
-		String id2 = req.getParameter("id");
+		String idCheck = req.getParameter("id");
 		String nick = req.getParameter("nickname");
 
-		if(id2 != null) {
-			String id = ud.idCheck(id2);
+		if(idCheck != null) {
+			String id = ud.idCheck(idCheck);
 			res.getWriter().print(id);
 		}
 		
@@ -63,5 +66,21 @@ public class MainController {
 			res.getWriter().print(nickname);
 		}
 	}
+	
+	@RequestMapping(value="/loginCheck", method = RequestMethod.POST)
+	public void loginCheck(HttpServletRequest req, HttpServletResponse res, LoginBean lb) throws IOException {
+		HttpSession hs = req.getSession();
+		List<LoginBean> lbList = ud.login(lb);
+		String result = "";
+		if(lbList.isEmpty()) {
+			result = "x";
+		}else {
+			result = lbList.get(0).getId();
+			hs.setAttribute("id", result);
+		}
+		res.getWriter().print(result);
+	}
+	
+	
 }
 			

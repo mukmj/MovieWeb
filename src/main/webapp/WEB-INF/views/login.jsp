@@ -12,13 +12,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/login.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#login').click(function (){
-            	location.href = "/";
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="login-reg-panel">
@@ -37,17 +30,17 @@
 		<div class="white-panel">
 			<div class="login-show">
 				<h2>LOGIN</h2>
-				<input type="text" placeholder="id">
-				<input type="password" placeholder="Password">
+				<input type="text" name="loginId" id="loginId" placeholder="id">
+				<input type="password" name="loginPw" id="loginPw" placeholder="Password">
 				<input type="button" id="login" value="Login">
 				<a href="">아이디 찾기</a>
 			</div>
-			<form action="/signUp" method="post" enctype="multipart/form-data">
+			<form action="/signUp" method="post" enctype="multipart/form-data" onsubmit="return subCheck();">
 				<div class="register-show">
 					<h2>Sign Up</h2>
 					<input type="text" class="register-id" name="id" id="id" placeholder="id">
 	                <button type="button" class="idCheck-button" id="idCheck">중복확인</button>
-					<input type="password" class="register-text" name="password" placeholder="Password">
+					<input type="password" class="register-text" name="password" id="pass" placeholder="Password">
 					<input type="text" class="register-id" name="nickname" id="nickname" placeholder="Nickname">
 	                <button type="button" class="idCheck-button" id="nickNameCheck">중복확인</button>
 	           		<div class="upload-Box">
