@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,16 @@ import com.movie.project.bean.SignUpBean;
 public class MainController {
 	@Autowired
 	UserDao ud;
+	
+	@RequestMapping("/")
+	public String home(HttpServletRequest req, HttpSession hs) {
+		String id = (String)hs.getAttribute("id");
+		
+		System.out.println("id:" + id);
+		req.setAttribute("sessionId", id);
+		
+		return "Main";
+	}
 	
 	@RequestMapping(value="/signUp", method = RequestMethod.POST)
 	public String sighUp(HttpServletRequest req, @RequestParam("profileImg") MultipartFile file) {
@@ -81,6 +92,9 @@ public class MainController {
 		res.getWriter().print(result);
 	}
 	
-	
+	@RequestMapping(value="/headline", method = RequestMethod.POST)
+	public String headline(HttpServletRequest req, HttpServletResponse res ) {
+		return "headline";
+	}
 }
 			

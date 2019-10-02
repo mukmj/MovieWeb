@@ -17,7 +17,7 @@
     <script src="/resources/js/main.js"></script>
     <script>
 	    $(document).ready(function(){
-	        $("#load").load("/resources/headline.html");
+	        $("#load").load("/headline");
 	    });
     </script>
 </head>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                                <div class="cont">
+                <div class="cont">
                     <div class="img-box-large">
                         <div class="img-box">
                             <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/guest/image/EpL2YRegeTQGGzHQgn5dgYF0pgI.png">

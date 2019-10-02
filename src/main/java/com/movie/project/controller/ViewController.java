@@ -12,19 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ViewController {
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest req) {
-		return "Main";
+	@GetMapping("/headline")
+	public String headline() {
+		return "headline";
 	}
 	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
-	}
-	
-	@GetMapping("/headline")
-	public String headline() {
-		return "headline";
 	}
 	
 	@GetMapping("/list")

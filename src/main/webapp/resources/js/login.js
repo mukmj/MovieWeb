@@ -113,11 +113,12 @@ $(document).ready(function(){
     				alert("존재하지 않는 아이디입니다.");
     			}else{
     				location.href = "/";
-    			}
+    			}			
     		}
     	});
     });
-
+  
+    
 });
 
 //중복체크
