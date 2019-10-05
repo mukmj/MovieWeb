@@ -22,18 +22,8 @@ public class ViewController {
 		return "login";
 	}
 	
-	@GetMapping("/list")
-	public String list() {
-		return "list";
-	}
-	
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin";
-	}
-	
-	@GetMapping("/MovieInfo")
-	public String MovieInfo() {
-		return "MovieInfo";
 	}
 }

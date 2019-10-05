@@ -1,3 +1,6 @@
+<%@page import="com.movie.project.bean.MovieListBean"%>
+<%@page import="com.movie.project.bean.MovieWriteBean"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +44,7 @@
                         <a href="" class="nav-link" data-toggle="tab">로맨스</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">스포츠</a>
+                        <a href="" class="nav-link" data-toggle="tab">범죄</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link" data-toggle="tab">액션</a>
@@ -67,41 +70,23 @@
             </div>
             <div class="movieList-cont">
                 <div class="row">
-                    <div class="col-sm-4" id="test" style="width: 25%;">
+<%
+	List<MovieListBean> movieList = (List<MovieListBean>) request.getAttribute("movieList");
+	String path = "http://192.168.0.3/MovieImg/";
+	if(movieList != null){
+		for(int i = 0; i < movieList.size(); i++){	
+%>            
+                    <div class="col-sm-4" id="movieInfo" onclick="noCheck(<%=movieList.get(i).getNo()%>)" style="width: 25%;" >
                       <div class="panel panel-primary">
-                        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                        <div class="panel-body"><img src="http://www.kobis.or.kr/common/mast/movie/2019/09/18a502eedb5443bc9f9e40f17505f83a.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                        <div class="panel-heading"><%=movieList.get(i).getTitle_kor()%></div>
+                        <div class="panel-body"><img src=<%=path + movieList.get(i).getImgUrl()%> class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer"><%=movieList.get(i).getOpenDate()%></div>
                       </div>
                     </div>
-                    <div class="col-sm-4" style="width: 25%;"> 
-                      <div class="panel panel-primary">
-                        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                        <div class="panel-body"><img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/guest/image/EpL2YRegeTQGGzHQgn5dgYF0pgI.png" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                      </div>
-                    </div>
-                    <div class="col-sm-4" style="width: 25%;"> 
-                      <div class="panel panel-primary"  >
-                        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                      </div>
-                    </div>
-                    <div class="col-sm-4" style="width: 25%;"> 
-                      <div class="panel panel-primary"  >
-                        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                      </div>
-                    </div>
-                    <div class="col-sm-4" style="width: 25%;"> 
-                      <div class="panel panel-primary"  >
-                        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                      </div>
-                    </div>
+<%
+		}
+	}
+%>                    
                 </div>
             </div>
         </div>

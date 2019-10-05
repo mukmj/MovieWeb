@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.movie.project.bean.MovieWriteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +19,17 @@
 </head>
 <body>
     <div id="load"></div>
+<%
+	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
+	String path = "http://192.168.0.3/MovieImg/";
+	String genre = "";
+	if(mwList.get(0).getGenre2() != null){
+		genre = mwList.get(0).getGenre1() + "/" + mwList.get(0).getGenre2();
+	}else{
+		genre = mwList.get(0).getGenre1();
+	}
+%>
+
     <div class="container">
         <div class="row">
             <div class="col-12" style="min-width: 720px;">
@@ -25,23 +38,24 @@
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container" >
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 200px" class="img-thumbnail" />
+                                    <img src=<%=path + mwList.get(0).getImgUrl() %> id="imgProfile" style="width: 150px; height: 200px" class="img-thumbnail" />
                                     <div class="middle">
                                         <input type="file" style="display: none;" id="profilePicture" name="file" />
                                     </div>
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">레플리카</a></h2>
-                                    <h6 class="d-block" style="border-bottom: 1px solid grey">Replica</h6>
-                                    <h6 class="d-block">액션</h6>
-                                    <h6 class="d-block">96분</h6>
-                                    <h6 class="d-block">미국</h6>
-                                    <h6 class="d-block">2019-09-25</h6>
-                                    <h6 class="d-block">제작사</h6>
-                                    <h6 class="d-block">배급사</h6>
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);"><%=mwList.get(0).getTitle_kor() %></a></h2>
+                                    <h6 class="d-block" style="border-bottom: 1px solid grey"><%=mwList.get(0).getTitle_eng() %></h6>                                   
+                                    <h6 class="d-block"><%=genre%></h6>							
+                                    <h6 class="d-block"><%=mwList.get(0).getMovieTime()%>분</h6>
+                                    <h6 class="d-block"><%=mwList.get(0).getNation()%></h6>
+                                    <h6 class="d-block"><%=mwList.get(0).getOpenDate() %></h6>
+                                    <h6 class="d-block"><%=mwList.get(0).getProducer() %></h6>
+                                    <h6 class="d-block"><%=mwList.get(0).getCompany()%></h6>
                                 </div>
-                                <div class="ml-auto">
+                                <div class="ml-auto">                             
                                     <form>
+                                    	<button type="button" id="listBack" class="commentButt adminButt">목록</button>
                                     	<button type="submit" class="commentButt adminButt">수정</button>
                                     	<button type="submit" class="commentButt adminButt">삭제</button>
                                     </form>
@@ -65,7 +79,7 @@
                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
                                         <div class="row">
                                             <div class="plotbox">
-                                                <p>asdasdasdasd</p>
+                                                <p><%=mwList.get(0).getPlot() %></p>
                                             </div>
                                         </div>
                                         <hr>

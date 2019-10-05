@@ -6,10 +6,28 @@
 	<select id="writeNo" resultType="int" parameterType="String">
 		SELECT no FROM movieWrite where title_kor = #{title_kor}
 	</select>
+	
+	<select id="movieList" resultType="com.movie.project.bean.MovieListBean">
+		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N';
+	</select>
+	
+	<select id="movie" resultType="com.movie.project.bean.MovieWriteBean" parameterType="string">
+		select w.*, i.imgUrl
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.`writeNo`
+		where w.delYn = 'N' and w.no = #{no}
+	</select>
+	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})
 	</insert>
+	
 	<insert id="imgInsert" parameterType="com.movie.project.bean.MovieImgBean">
 		INSERT INTO movieImg (writeNo, imgUrl) VALUES (#{writeNo}, #{imgUrl})
 	</insert>

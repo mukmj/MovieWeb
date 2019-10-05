@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
+import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.SignUpBean;
 
@@ -40,5 +41,15 @@ public class MovieDao {
 		mib.setWriteNo(no);
 		mib.setImgUrl(imgUrl);
 		session.insert("movie.imgInsert", mib);
+	}
+	
+	public List<MovieListBean> movieList() {
+		List<MovieListBean> movieList = session.selectList("movie.movieList");
+		return movieList;
+	}
+	
+	public List<MovieWriteBean> movie(String no){
+		List<MovieWriteBean> mwList = session.selectList("movie.movie", no);
+		return mwList;
 	}
 }

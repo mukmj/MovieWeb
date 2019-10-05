@@ -20,11 +20,14 @@ import com.movie.project.FileUploadImg;
 import com.movie.project.MovieDao;
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
+import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.SignUpBean;
 
 @Controller
 public class MainController {
+	String no;
+	
 	@Autowired
 	FileUploadImg fud;
 	
@@ -48,8 +51,6 @@ public class MainController {
 		if(profileImg.equals("")) {
 			profileImg = "none.png";
 		}
-		
-		System.out.println(id + profileImg );
 		
 		SignUpBean sb = new SignUpBean();
 		
@@ -111,5 +112,30 @@ public class MainController {
 		md.MovieWrit(mwb, imgUrl);
 		return "redirect: /admin";
 	}
+	
+	@RequestMapping("/list")
+	public String list(Model m) {
+		List<MovieListBean> movieList = md.movieList();
+		m.addAttribute("movieList", movieList);
+		return "list";
+	}
+	
+
+	
+	@RequestMapping("/Movie")
+	public String Movie(HttpServletRequest req) {
+		no = req.getParameter("no");	
+		return "redirect:/MovieInfo";
+	}
+	
+	@RequestMapping("/MovieInfo")
+	public String MovieInfo(HttpServletRequest req) {
+		List<MovieWriteBean> mwList = md.movie(no);
+		req.setAttribute("mwList", mwList);
+		
+		return "MovieInfo";
+	}
+	
+
 }
 			

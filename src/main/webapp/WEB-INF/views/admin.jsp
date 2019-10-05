@@ -85,7 +85,7 @@
 	                                <option value="스릴러">스릴러</option>
 	                                <option value="드라마">드라마</option>
 	                                <option value="로맨스">로맨스</option>
-	                                <option value="스포츠">스포츠</option>
+	                                <option value="범죄">범죄</option>
 	                                <option value="액션">액션</option>
 	                            </select>
 	    					</div>		
@@ -107,7 +107,7 @@
 	                                <option value="스릴러">스릴러</option>
 	                                <option value="드라마">드라마</option>
 	                                <option value="로맨스">로맨스</option>
-	                                <option value="스포츠">스포츠</option>
+	                                <option value="범죄">범죄</option>
 	                                <option value="액션">액션</option>
 	                            </select>
 	    					</div>		

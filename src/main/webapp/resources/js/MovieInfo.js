@@ -1,7 +1,10 @@
 $(document).ready(function(){
             $("#load").load("headline.html");
+            $('#listBack').click(function(){
+            	location.href = "/list";
+            });
             
-             $imgSrc = $('#imgProfile').attr('src');
+            $imgSrc = $('#imgProfile').attr('src');
             function readURL(input) {
 
                 if (input.files && input.files[0]) {
