@@ -5,8 +5,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+@Service
 public class FileUploadImg {
 	public String fileUpload(MultipartFile file, String path) {
 		String allPath="";

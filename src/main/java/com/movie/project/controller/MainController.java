@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,34 +17,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.movie.project.FileUploadImg;
-import com.movie.project.UserDao;
+import com.movie.project.MovieDao;
 import com.movie.project.bean.LoginBean;
+import com.movie.project.bean.MovieImgBean;
+import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.SignUpBean;
 
 @Controller
 public class MainController {
 	@Autowired
-	UserDao ud;
+	FileUploadImg fud;
+	
+	@Autowired
+	MovieDao md;
 	
 	@RequestMapping("/")
-	public String home(HttpServletRequest req, HttpSession hs) {
-		String id = (String)hs.getAttribute("id");
-		
-		System.out.println("id:" + id);
-		req.setAttribute("sessionId", id);
-		
+	public String home(HttpServletRequest req) {
 		return "Main";
 	}
 	
 	@RequestMapping(value="/signUp", method = RequestMethod.POST)
 	public String sighUp(HttpServletRequest req, @RequestParam("profileImg") MultipartFile file) {
-		FileUploadImg fu = new FileUploadImg();
 		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\profile\\";
 		
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
 		String nickname = req.getParameter("nickname");
-		String profileImg = fu.fileUpload(file, path);
+		String profileImg = fud.fileUpload(file, path);
 		
 		if(profileImg.equals("")) {
 			profileImg = "none.png";
@@ -58,7 +58,7 @@ public class MainController {
 		sb.setNickname(nickname);
 		sb.setProfileImg(profileImg);
 		
-		ud.SignUpDao(sb);
+		md.SignUpDao(sb);
 		return "redirect:/login";
 	}
 	
@@ -68,12 +68,12 @@ public class MainController {
 		String nick = req.getParameter("nickname");
 
 		if(idCheck != null) {
-			String id = ud.idCheck(idCheck);
+			String id = md.idCheck(idCheck);
 			res.getWriter().print(id);
 		}
 		
 		if(nick != null) {
-			String nickname = ud.nickCheck(nick);
+			String nickname = md.nickCheck(nick);
 			res.getWriter().print(nickname);
 		}
 	}
@@ -81,7 +81,7 @@ public class MainController {
 	@RequestMapping(value="/loginCheck", method = RequestMethod.POST)
 	public void loginCheck(HttpServletRequest req, HttpServletResponse res, LoginBean lb) throws IOException {
 		HttpSession hs = req.getSession();
-		List<LoginBean> lbList = ud.login(lb);
+		List<LoginBean> lbList = md.login(lb);
 		String result = "";
 		if(lbList.isEmpty()) {
 			result = "x";
@@ -95,6 +95,21 @@ public class MainController {
 	@RequestMapping(value="/headline", method = RequestMethod.POST)
 	public String headline(HttpServletRequest req, HttpServletResponse res ) {
 		return "headline";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession hs) {
+		hs.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/insert", method = RequestMethod.POST)
+	public String insert(HttpServletRequest req, @RequestParam("MovieImg") MultipartFile file, MovieWriteBean mwb) {
+		String path = "D:\\Java\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+		String imgUrl = fud.fileUpload(file, path);
+		
+		md.MovieWrit(mwb, imgUrl);
+		return "redirect: /admin";
 	}
 }
 			

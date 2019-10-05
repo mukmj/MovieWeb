@@ -27,9 +27,9 @@ public class ViewController {
 		return "list";
 	}
 	
-	@GetMapping("/insert")
-	public String insert() {
-		return "insert";
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
 	}
 	
 	@GetMapping("/MovieInfo")

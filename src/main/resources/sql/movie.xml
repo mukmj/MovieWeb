@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie">
+	<select id="writeNo" resultType="int" parameterType="String">
+		SELECT no FROM movieWrite where title_kor = #{title_kor}
+	</select>
+	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
+		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
+		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})
+	</insert>
+	<insert id="imgInsert" parameterType="com.movie.project.bean.MovieImgBean">
+		INSERT INTO movieImg (writeNo, imgUrl) VALUES (#{writeNo}, #{imgUrl})
+	</insert>
+</mapper>

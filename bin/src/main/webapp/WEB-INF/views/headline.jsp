@@ -20,23 +20,20 @@
         <ul class="nav-list">
             <li id="home">Home</li>
             <li id="list">Movie</li>
-            <li id="admin">Admin</li>
+            <li>Info</li>
+            <li id="insert">등록</li>
         </ul>
 
         <ul class="nav-login">
-<%
-	String id = (String)session.getAttribute("id");
-	if(id == null){
-%>         
             <li id="login">로그인</li>
 <%
-	}else{
-%>        
-			<li id="logout">로그아웃</li>
+	String id = request.getParameter("id");
+	if(id != null){
+%>     
             <li id="user"><%=id%> 님</li>
 <%
 	}
-%>
+%>        
         </ul>
     </nav>
 </body>

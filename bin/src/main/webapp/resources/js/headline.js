@@ -8,11 +8,11 @@ $(document).ready(function(){
     	 $('.nav-list li').eq(0).removeClass('select');
       	 $('.nav-list li').eq(1).addClass('select');
       	 index = 1;
-    }else if(address == "admin"){
+    }else if(address == "insert"){
     	 $('.nav-list li').eq(index).removeClass('select');
     	 $('.nav-list li').eq(0).removeClass('select');
-    	 $('.nav-list li').eq(2).addClass('select');
-    	 index = 2;
+    	 $('.nav-list li').eq(3).addClass('select');
+    	 index = 3;
     }
   
     $('#login').click(function(){
@@ -27,11 +27,7 @@ $(document).ready(function(){
     	location.href = "/list";
     });
     
-    $('#admin').click(function(){
-    	location.href = "/admin";
-    });
-    
-    $('#logout').click(function(){
-    	location.href = "/logout";
+    $('#insert').click(function(){
+    	location.href = "/insert";
     });
 });

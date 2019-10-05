@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.movie.project.bean.LoginBean;
+import com.movie.project.bean.MovieImgBean;
+import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.SignUpBean;
 
 @Repository
-public class UserDao {
+public class MovieDao {
 	@Autowired
 	SqlSession session;
 	
@@ -28,8 +30,15 @@ public class UserDao {
 	
 	public List<LoginBean> login(LoginBean lb) {
 		List<LoginBean> lbList = session.selectList("signUp.login", lb);
-		
 		return lbList;
 	}
-
+	
+	public void MovieWrit(MovieWriteBean mwb, String imgUrl) {
+		session.insert("movie.insert", mwb);
+		int no = session.selectOne("movie.writeNo", mwb.getTitle_kor());
+		MovieImgBean mib = new MovieImgBean();
+		mib.setWriteNo(no);
+		mib.setImgUrl(imgUrl);
+		session.insert("movie.imgInsert", mib);
+	}
 }
