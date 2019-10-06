@@ -31,6 +31,7 @@
 
 .nav-item {
     width: 100%;
+    padding: 10px 15px;
 }
 
 .nav-item:hover {
@@ -130,7 +131,21 @@
 }
 
 .panel-body {
-    min-height: 262px;
+    min-height: 273px;
+    height: 77%;
+}
+
+@supports(object-fit: cover){
+    .panel-body img{
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+.panel-footer{
+	background-color: white !important;
+	border-top: 1px dashed #9f0000 !important;
 }
 
 @media (min-width: 1242px){

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movieSearch">
+	<select id="genre" resultType="com.movie.project.bean.MovieListBean" parameterType="String">
+		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N' and w.genre1 = #{genre} or w.genre2 = #{genre};
+	</select>
+</mapper>

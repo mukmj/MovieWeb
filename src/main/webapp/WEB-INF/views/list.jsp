@@ -18,54 +18,38 @@
 </head>
 <body>
     <div id="load"></div>
-    <div class="big-cont">
+    <div class="big-cont" id="bigContainer">
         <div class="genre-nav">
             <div class="left_bar">
-                <ul class=" nav-tabs--vertical nav" role="navigation">
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">전체</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">코미디</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">SF/판타지</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link " data-toggle="tab">공포</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">스릴러</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">드라마</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">로맨스</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">범죄</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link" data-toggle="tab">액션</a>
-                    </li>
+                <ul class=" nav-tabs--vertical nav" id="searchText" role="navigation">
+                    <li class="nav-item">전체</li>
+                    <li class="nav-item">코미디</li>
+                    <li class="nav-item">SF/판타지</li>
+                    <li class="nav-item">공포</li>
+                    <li class="nav-item">스릴러</li>
+                    <li class="nav-item">드라마</li>
+                    <li class="nav-item">로맨스</li>
+                    <li class="nav-item">범죄</li>
+                    <li class="nav-item">액션</li>
                </ul>
            </div>
         </div>
         <div class="list-cont">
             <div class="search-cont">
                 <div class="search-cont-small">
-                    <div class="namebox">
-                        <label>영화명: </label>
-                        <input type="text" id="nameSearch">
-                    </div>
-                    <div class="datebox">
-                        <label>개봉년월: </label>
-                        <input type="month" id="dateSearch">
-                    </div>
-                    <div class="searchButt">
-                        <button type="button">검색</button>
-                    </div>
+                	<form action="/list" method="post">
+	                    <div class="namebox">
+	                        <label>영화명: </label>
+	                        <input type="text" name="title" id="nameSearch">
+	                    </div>
+	                    <div class="datebox">
+	                        <label>개봉년월: </label>
+	                        <input type="month" name="openDate" id="dateSearch">
+	                    </div>
+	                    <div class="searchButt">
+	                        <button type="submit">검색</button>
+	                    </div>
+                    </form>
                 </div>
             </div>
             <div class="movieList-cont">

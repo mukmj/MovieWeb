@@ -43,8 +43,15 @@ public class MovieDao {
 		session.insert("movie.imgInsert", mib);
 	}
 	
-	public List<MovieListBean> movieList() {
-		List<MovieListBean> movieList = session.selectList("movie.movieList");
+	public List<MovieListBean> movieList(String genre) {
+		List<MovieListBean> movieList = null;
+
+		if(genre.equals("전체")) {
+			movieList = session.selectList("movie.movieList");
+		} else {
+			movieList = session.selectList("movieSearch.genre", genre);
+		}
+		
 		return movieList;
 	}
 	

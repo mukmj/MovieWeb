@@ -22,6 +22,7 @@ import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
+import com.movie.project.bean.SearchBean;
 import com.movie.project.bean.SignUpBean;
 
 @Controller
@@ -113,14 +114,25 @@ public class MainController {
 		return "redirect: /admin";
 	}
 	
-	@RequestMapping("/list")
-	public String list(Model m) {
-		List<MovieListBean> movieList = md.movieList();
-		m.addAttribute("movieList", movieList);
-		return "list";
+
+	String genre = "";
+	@RequestMapping("/listGenre")
+	public String listView(Model m, HttpServletRequest req) {
+		genre = req.getParameter("genre");
+		return "redirect:/list";
 	}
 	
+	@RequestMapping("/list")
+	public String list(Model m, HttpServletRequest req, SearchBean sb) {
+		if(genre.equals("")) {
+			genre = "전체";
+		}
+		System.out.println(req.getParameter("title")+ sb.getOpenDate());
+		List<MovieListBean> movieList = md.movieList(genre);
+		m.addAttribute("movieList", movieList);
 
+		return "list";
+	}
 	
 	@RequestMapping("/Movie")
 	public String Movie(HttpServletRequest req) {
