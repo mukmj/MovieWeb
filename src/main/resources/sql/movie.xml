@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="movie">
-	<select id="writeNo" resultType="int" parameterType="int">
+	<select id="writeNo" resultType="int" parameterType="String">
 		SELECT no FROM movieWrite where title_kor = #{title_kor}
 	</select>
 	
@@ -41,5 +41,15 @@
 	
 	<update id="movieDelete" parameterType="int">
 		UPDATE movieWrite SET delYn = 'Y' WHERE NO = #{no}
+	</update>
+	
+	<update id="update" parameterType="com.movie.project.bean.MovieWriteBean">
+		update movieWrite set title_kor = #{title_kor}, title_eng = #{title_eng}, plot = #{plot}, movieTime = #{movieTime}, nation = #{nation}, openDate = #{openDate}, producer = #{producer},
+		company = #{company}, genre1 = #{genre1}, genre2 = #{genre2}
+		where no = #{no}
+	</update>
+
+	<update id="imgUpdate" parameterType="com.movie.project.bean.MovieImgBean">
+		update movieImg set imgUrl = #{imgUrl} where writeNo = #{writeNo}
 	</update>
 </mapper>

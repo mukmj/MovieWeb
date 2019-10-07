@@ -27,8 +27,5 @@ public class ViewController {
 		return "admin";
 	}
 	
-	@GetMapping("/update")
-	public String update() {
-		return "update";
-	}
+
 }

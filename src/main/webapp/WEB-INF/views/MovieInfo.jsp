@@ -23,6 +23,7 @@
 	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
 	String path = "http://192.168.3.40/MovieImg/";
 	String genre = "";
+	
 	if(mwList.get(0).getGenre2() != null){
 		genre = mwList.get(0).getGenre1() + "/" + mwList.get(0).getGenre2();
 	}else{

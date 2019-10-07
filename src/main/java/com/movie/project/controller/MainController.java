@@ -29,7 +29,7 @@ import com.movie.project.bean.SignUpBean;
 @Controller
 public class MainController {
 	int no;
-	
+	String type;
 	@Autowired
 	FileUploadImg fud;
 	
@@ -110,8 +110,8 @@ public class MainController {
 	public String insert(HttpServletRequest req, @RequestParam("MovieImg") MultipartFile file, MovieWriteBean mwb) {
 		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
 		String imgUrl = fud.fileUpload(file, path);
-		
-		md.MovieWrite(mwb, imgUrl);
+		type = "insert";
+		md.MovieWrite(type, mwb, imgUrl);
 		return "redirect: /admin";
 	}
 	
@@ -145,21 +145,38 @@ public class MainController {
 	public String MovieInfo(HttpServletRequest req) {
 		List<MovieWriteBean> mwList = md.movie(no);
 		req.setAttribute("mwList", mwList);
-		
 		return "MovieInfo";
 	}
 	
 	@RequestMapping("/movieDelete")
 	public String movieDelete() {
-		String type = "delete";
-		md.movieUpDel(no, type);
+		md.movieDelete(no);
 		return "redirect: /list";
 	}
 	
+	@RequestMapping("/update")
+	public String update(Model m, HttpServletRequest req, HttpServletResponse res) throws IOException {
+		List<MovieWriteBean> updateList = md.movie(no);
+		String genre = updateList.get(0).getGenre1();
+		res.getWriter().print(genre);
+		m.addAttribute("updateList", updateList);
+		return "update";
+	}
+	
 	@RequestMapping("/movieUpdate")
-	public String movieUpdate() {
+	public String movieUpdate(HttpServletRequest req, @RequestParam("MovieImgUpdate") MultipartFile file, MovieWriteBean mwb) {
+		String path = "";
+		String imgUrl = "";
 		
+		if(file != null) {
+			path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+			imgUrl = fud.fileUpload(file, path);
+		}
+		mwb.setNo(no);
+		type = "update"; 
+		md.MovieWrite(type, mwb, imgUrl);
 		return "redirect:/MovieInfo";
 	}
+	
 }
 			

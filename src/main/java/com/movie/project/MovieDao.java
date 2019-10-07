@@ -36,13 +36,25 @@ public class MovieDao {
 		return lbList;
 	}
 	
-	public void MovieWrite(MovieWriteBean mwb, String imgUrl) {
-		session.insert("movie.insert", mwb);
-		int no = session.selectOne("movie.writeNo", mwb.getTitle_kor());
+	public void MovieWrite(String type, MovieWriteBean mwb, String imgUrl) {
+		int no = 0;
+		
 		MovieImgBean mib = new MovieImgBean();
-		mib.setWriteNo(no);
-		mib.setImgUrl(imgUrl);
-		session.insert("movie.imgInsert", mib);
+		System.out.println(mwb.getNo());
+		if(type.equals("insert")) {
+			session.insert("movie.insert", mwb);
+			no = session.selectOne("movie.writeNo", mwb.getTitle_kor());
+			mib.setWriteNo(no);
+			mib.setImgUrl(imgUrl);
+			session.insert("movie.imgInsert", mib);
+		}
+		
+		if(type.equals("update")) {
+			session.update("movie.update", mwb);
+			mib.setWriteNo(mwb.getNo());
+			mib.setImgUrl(imgUrl);
+			session.update("movie.imgUpdate", mib);
+		}
 	}
 	
 	public List<MovieListBean> movieList(String genre, SearchBean sb) {
@@ -63,9 +75,9 @@ public class MovieDao {
 		return mwList;
 	}
 	
-	public void movieUpDel(int no, String type) {
-		if(type.equals("delete")) {
-			session.update("movieDelete", no);
-		}
+	public void movieDelete(int no) {
+		session.update("movieDelete", no);
 	}
+	
+	
 }
