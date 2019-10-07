@@ -56,7 +56,7 @@
                 <div class="row">
 <%
 	List<MovieListBean> movieList = (List<MovieListBean>) request.getAttribute("movieList");
-	String path = "http://192.168.0.3/MovieImg/";
+	String path = "http://192.168.3.40/MovieImg/";
 	if(movieList != null){
 		for(int i = 0; i < movieList.size(); i++){	
 %>            

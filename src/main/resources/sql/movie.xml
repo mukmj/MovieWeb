@@ -3,24 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="movie">
-	<select id="writeNo" resultType="int" parameterType="String">
+	<select id="writeNo" resultType="int" parameterType="int">
 		SELECT no FROM movieWrite where title_kor = #{title_kor}
 	</select>
 	
-	<select id="movieList" resultType="com.movie.project.bean.MovieListBean">
-		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
-		from movieWrite w
-		join movieImg i
-		on w.`no` = i.writeNo
-		where w.delYn = 'N';
-	</select>
-	
-	<select id="movie" resultType="com.movie.project.bean.MovieWriteBean" parameterType="string">
+	<select id="movie" resultType="com.movie.project.bean.MovieWriteBean" parameterType="int">
 		select w.*, i.imgUrl
 		from movieWrite w
 		join movieImg i
 		on w.`no` = i.`writeNo`
 		where w.delYn = 'N' and w.no = #{no}
+	</select>
+	
+	<select id="all_search" resultType="com.movie.project.bean.MovieListBean" parameterType="hashmap">
+		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N'
+		<if test="genre != '전체'">and (w.genre1 = #{genre} or w.genre2 = #{genre})</if>
+		<if test="title != null and openDate == ''">AND w.title_kor LIKE '%${title}%' or w.title_eng LIKE '%${title}%'</if>
+		<if test="title == '' and openDate != null">AND LEFT(w.openDate, 7) = '${openDate}'</if>
+		<if test="title != null and openDate != null">
+			AND (w.title_kor LIKE '%${title}%' or w.title_eng LIKE '%${title}%')
+			AND LEFT(w.openDate, 7) = '${openDate}'
+		</if>
 	</select>
 	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
@@ -31,4 +38,8 @@
 	<insert id="imgInsert" parameterType="com.movie.project.bean.MovieImgBean">
 		INSERT INTO movieImg (writeNo, imgUrl) VALUES (#{writeNo}, #{imgUrl})
 	</insert>
+	
+	<update id="movieDelete" parameterType="int">
+		UPDATE movieWrite SET delYn = 'Y' WHERE NO = #{no}
+	</update>
 </mapper>

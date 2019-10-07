@@ -21,7 +21,7 @@
     <div id="load"></div>
 <%
 	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
-	String path = "http://192.168.0.3/MovieImg/";
+	String path = "http://192.168.3.40/MovieImg/";
 	String genre = "";
 	if(mwList.get(0).getGenre2() != null){
 		genre = mwList.get(0).getGenre1() + "/" + mwList.get(0).getGenre2();
@@ -56,8 +56,8 @@
                                 <div class="ml-auto">                             
                                     <form>
                                     	<button type="button" id="listBack" class="commentButt adminButt">목록</button>
-                                    	<button type="submit" class="commentButt adminButt">수정</button>
-                                    	<button type="submit" class="commentButt adminButt">삭제</button>
+                                    	<button type="button" class="commentButt adminButt">수정</button>
+                                    	<button type="button" id="movieDelete" class="commentButt adminButt">삭제</button>
                                     </form>
                                 </div>
                             </div>

@@ -39,45 +39,45 @@
 	    				<div class="row">
 	    					<div class="col-sm-6 form-group">
 	    						<label>영화명(한국)</label>
-	    						<input type="text" placeholder="한국 영화명을 입력하세요." name="title_kor" class="form-control">
+	    						<input type="text" placeholder="한국 영화명을 입력하세요." name="title_kor" class="form-control" required="required">
 	    					</div>
 	    					<div class="col-sm-6 form-group">
 	    						<label>영화명(영어)</label>
-	    						<input type="text" placeholder="영어 영화명을 입력하세요." name="title_eng" class="form-control">
+	    						<input type="text" placeholder="영어 영화명을 입력하세요." name="title_eng" class="form-control" required="required">
 	    					</div>
 	    				</div>					
 	    				<div class="form-group">
 	    					<label>내용</label>
-	    					<textarea placeholder="영화 내용을 입력하세요." rows="3" name="plot" class="form-control" style="resize: none;"></textarea>
+	    					<textarea placeholder="영화 내용을 입력하세요." rows="3" name="plot" class="form-control" style="resize: none;" required="required"></textarea>
 	    				</div>	
 	    				<div class="row">
 	    					<div class="col-sm-4 form-group">
 	    						<label>총 상영 시간</label>
-	    						<input type="number" placeholder="분단위로 입력하세요." name="movieTime" class="form-control">
+	    						<input type="number" placeholder="분단위로 입력하세요." name="movieTime" class="form-control" required="required">
 	    					</div>	
 	    					<div class="col-sm-4 form-group">
 	    						<label>제작 국가</label>
-	    						<input type="text" placeholder="국가명을 입력하세요." name="nation" class="form-control">
+	    						<input type="text" placeholder="국가명을 입력하세요." name="nation" class="form-control" required="required">
 	    					</div>	
 	    					<div class="col-sm-4 form-group">
 	    						<label>개봉 날짜</label>
-	    						<input type="date" name="openDate" class="form-control">
+	    						<input type="date" name="openDate" class="form-control" required="required">
 	    					</div>		
 	    				</div>
 	    				<div class="row">
 	    					<div class="col-sm-6 form-group">
 	    						<label>제작사</label>
-	    						<input type="text" placeholder="제작사를 입력하세요." name="producer" class="form-control">
+	    						<input type="text" placeholder="제작사를 입력하세요." name="producer" class="form-control" required="required">
 	    					</div>		
 	    					<div class="col-sm-6 form-group">
 	    						<label>배급사</label>
-	    						<input type="text" placeholder="배급사를 입력하세요." name="company" class="form-control">
+	    						<input type="text" placeholder="배급사를 입력하세요." name="company" class="form-control" required="required">
 	    					</div>	
 	    				</div>
 	                    <div class="row">
 	    					<div class="col-sm-6 form-group">
 	    						<label>장르</label>
-	    						<select name="genre1" class="genre-select">
+	    						<select name="genre1" class="genre-select" required="required">
 	                                <option value="">장르선택</option>
 	                                <option value="코미디">코미디</option>
 	                                <option value="SF/판타지">SF/판타지</option>
@@ -117,7 +117,7 @@
 	    				<div class="file_input">
 	                        <label>
 	                            File Attach
-	                            <input type="file" name="MovieImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+	                            <input type="file" name="MovieImg" required="required" onchange="javascript:document.getElementById('file_route').value=this.value">
 	                        </label>
 	                        <input type="text" readonly="readonly" title="File Route" id="file_route">
 	                    </div>

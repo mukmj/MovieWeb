@@ -1,6 +1,7 @@
 package com.movie.project.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ import com.movie.project.bean.SignUpBean;
 
 @Controller
 public class MainController {
-	String no;
+	int no;
 	
 	@Autowired
 	FileUploadImg fud;
@@ -107,7 +108,7 @@ public class MainController {
 	
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest req, @RequestParam("MovieImg") MultipartFile file, MovieWriteBean mwb) {
-		String path = "D:\\Java\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
 		String imgUrl = fud.fileUpload(file, path);
 		
 		md.MovieWrit(mwb, imgUrl);
@@ -124,11 +125,11 @@ public class MainController {
 	
 	@RequestMapping("/list")
 	public String list(Model m, HttpServletRequest req, SearchBean sb) {
-		if(genre.equals("")) {
+		if(genre == "") {
 			genre = "전체";
 		}
-		System.out.println(req.getParameter("title")+ sb.getOpenDate());
-		List<MovieListBean> movieList = md.movieList(genre);
+		
+		List<MovieListBean> movieList = md.movieList(genre, sb);
 		m.addAttribute("movieList", movieList);
 
 		return "list";
@@ -136,7 +137,7 @@ public class MainController {
 	
 	@RequestMapping("/Movie")
 	public String Movie(HttpServletRequest req) {
-		no = req.getParameter("no");	
+		no = Integer.parseInt(req.getParameter("no"));	
 		return "redirect:/MovieInfo";
 	}
 	
@@ -148,6 +149,11 @@ public class MainController {
 		return "MovieInfo";
 	}
 	
-
+	@RequestMapping("/movieDelete")
+	public String movieDelete() {
+		String type = "delete";
+		md.movieUpDel(no, type);
+		return "redirect: /list";
+	}
 }
 			

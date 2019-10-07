@@ -50,4 +50,8 @@ $(document).ready(function(){
                 var score = $(this).index() + 1;
                 console.log(score);
             });
+            
+            $('#movieDelete').click(function(){
+                location.href="/movieDelete";
+            });
         });

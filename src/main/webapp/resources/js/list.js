@@ -28,6 +28,8 @@ $(document).ready(function(){
 		});
 	});
 	
-	
+	$('#searchText li').click(function(){
+		location.href = "/list";
+	});
 });
 
