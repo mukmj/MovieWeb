@@ -54,4 +54,9 @@ $(document).ready(function(){
             $('#movieDelete').click(function(){
                 location.href="/movieDelete";
             });
+                        
+            $('#movieUpdate').click(function(){
+            	var op = "width: 630, height: 500, top: 200, left: 200, location = no, resizable=no";
+            	window.open("/update", "영화 수정", op).resizeTo(630,700);
+            });
         });

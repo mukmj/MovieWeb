@@ -1,0 +1,112 @@
+@import "font-awesome.min.css";
+@import "font-awesome-ie7.min.css";
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-width: 610px !important;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+.btn {
+    background-color: #a80000 !important;
+    float: right;
+}
+
+.imgFileButt {
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    background-color: #ffffff;
+}
+
+.form-group span{
+    font-weight: bold;
+}
+
+.file_input {
+    margin-top: 10px;
+}
+
+.file_input label {
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    vertical-align:middle;
+    overflow:hidden;
+    width:100px;
+    height:30px;
+    background:#920000;
+    color:#fff;
+    text-align:center;
+    line-height:30px;
+    margin-bottom: 0;
+}
+.file_input label input {
+    position:absolute;
+    width:0;
+    height:0;
+    overflow:hidden;
+}
+.file_input input[type=text] {
+    display:inline-block;
+    width:400px;
+    height:28px;
+    line-height:28px;
+    font-size:11px;
+    padding:0;
+    border:0;
+    border:1px solid #bdbdbd;
+}
+
+.genre-select {
+    display: block;
+    width: 100%;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.plus {
+    margin-top: 23px;
+    cursor: pointer;
+}
+
+.plusButt {
+    background-color: #d4d4d4;
+    border-radius: 4px;
+}
+
+.container {
+	max-width: 600px;
+	min-width: 500px;
+	margin-left: unset !important;
+	margin-right: unset !important;
+}
+
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, 
+.col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+	float: none !important;
+	width: 100% !important;
+}

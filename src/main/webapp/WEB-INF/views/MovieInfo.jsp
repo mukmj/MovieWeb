@@ -56,7 +56,7 @@
                                 <div class="ml-auto">                             
                                     <form>
                                     	<button type="button" id="listBack" class="commentButt adminButt">목록</button>
-                                    	<button type="button" class="commentButt adminButt">수정</button>
+                                    	<button type="button" id="movieUpdate" class="commentButt adminButt">수정</button>
                                     	<button type="button" id="movieDelete" class="commentButt adminButt">삭제</button>
                                     </form>
                                 </div>

@@ -36,7 +36,7 @@ public class MovieDao {
 		return lbList;
 	}
 	
-	public void MovieWrit(MovieWriteBean mwb, String imgUrl) {
+	public void MovieWrite(MovieWriteBean mwb, String imgUrl) {
 		session.insert("movie.insert", mwb);
 		int no = session.selectOne("movie.writeNo", mwb.getTitle_kor());
 		MovieImgBean mib = new MovieImgBean();

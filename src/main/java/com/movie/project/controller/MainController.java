@@ -111,7 +111,7 @@ public class MainController {
 		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
 		String imgUrl = fud.fileUpload(file, path);
 		
-		md.MovieWrit(mwb, imgUrl);
+		md.MovieWrite(mwb, imgUrl);
 		return "redirect: /admin";
 	}
 	
@@ -154,6 +154,12 @@ public class MainController {
 		String type = "delete";
 		md.movieUpDel(no, type);
 		return "redirect: /list";
+	}
+	
+	@RequestMapping("/movieUpdate")
+	public String movieUpdate() {
+		
+		return "redirect:/MovieInfo";
 	}
 }
 			
