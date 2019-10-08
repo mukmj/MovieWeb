@@ -4,7 +4,6 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  max-width: 610px !important;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -98,11 +97,13 @@ body {
     border-radius: 4px;
 }
 
+.bigcont {
+	margin-top: 50px;	
+}
+
 .container {
 	max-width: 600px;
 	min-width: 500px;
-	margin-left: unset !important;
-	margin-right: unset !important;
 }
 
 .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, 

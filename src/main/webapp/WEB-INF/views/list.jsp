@@ -22,7 +22,7 @@
         <div class="genre-nav">
             <div class="left_bar">
                 <ul class=" nav-tabs--vertical nav" id="searchText" role="navigation">
-                    <li class="nav-item">전체</li>
+                    <li class="nav-item" id="all">전체</li>
                     <li class="nav-item">코미디</li>
                     <li class="nav-item">SF/판타지</li>
                     <li class="nav-item">공포</li>

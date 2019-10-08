@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#load").load("headline.html");
+    $("#load").load("/headline");
     $(".plusButt").click(function(){
         $('.genre2').slideToggle();
         $('.plus').toggle();

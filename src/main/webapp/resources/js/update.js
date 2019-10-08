@@ -1,5 +1,6 @@
 	$(document).ready(function(){
-	    $(".plusButt").click(function(){
+		$("#load").load("/headline");
+		$(".plusButt").click(function(){
 	        $('.genre2').slideToggle();
 	        $('.plus').toggle();
 	    });
@@ -9,8 +10,6 @@
 	    }
 	    
 	    $("#updateSubmit").click(function(){
-	    	opener.location.reload(); 
 	    	alert("수정완료!");
-	    	window.close();
 	    });
 	});

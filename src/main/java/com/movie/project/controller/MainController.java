@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,7 +111,13 @@ public class MainController {
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest req, @RequestParam("MovieImg") MultipartFile file, MovieWriteBean mwb) {
 		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
-		String imgUrl = fud.fileUpload(file, path);
+		String imgUrl = "";
+		if(file == null) {
+			imgUrl = "none.png";
+		}else {
+			imgUrl = fud.fileUpload(file, path);
+		}
+
 		type = "insert";
 		md.MovieWrite(type, mwb, imgUrl);
 		return "redirect: /admin";
@@ -168,15 +176,19 @@ public class MainController {
 		String path = "";
 		String imgUrl = "";
 		
-		if(file != null) {
-			path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
-			imgUrl = fud.fileUpload(file, path);
-		}
+		path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+		imgUrl = fud.fileUpload(file, path);
+	
 		mwb.setNo(no);
 		type = "update"; 
 		md.MovieWrite(type, mwb, imgUrl);
 		return "redirect:/MovieInfo";
 	}
 	
+	@RequestMapping("/comment")
+	public String comment() {
+		
+		return "redirect:/MovieInfo";
+	}
 }
 			

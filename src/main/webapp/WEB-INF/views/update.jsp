@@ -31,7 +31,8 @@
 	</script>	
 </head>
 <body>
-
+<div id="load"></div>
+<div class="bigcont">
 	<div class="container" id="insertBox">  
 		<div class="col-lg-12 well">
 	    	<div class="row">
@@ -129,6 +130,7 @@
 	    	</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
 

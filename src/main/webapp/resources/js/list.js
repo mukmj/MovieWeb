@@ -10,9 +10,9 @@ function noCheck(no){
 }
 
 $(document).ready(function(){
-	$("#load").load("headline.html");
+	$("#load").load("/headline");
 	
-	$('#searchText li').click(function(){
+	$('#searchText .nav-item').click(function(){
 		var i = $(this).index();
 		console.log(i);
 		
@@ -24,11 +24,9 @@ $(document).ready(function(){
 			type: "get"
 		}).done(function(){
 			console.log("success");
-			location.reload();
+			//location.reload();
 		});
-	});
-	
-	$('#searchText li').click(function(){
+		
 		location.href = "/list";
 	});
 });

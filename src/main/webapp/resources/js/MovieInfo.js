@@ -1,5 +1,5 @@
 $(document).ready(function(){
-            $("#load").load("headline.html");
+            $("#load").load("/headline");
             $('#listBack').click(function(){
             	location.href = "/list";
             });
@@ -56,7 +56,6 @@ $(document).ready(function(){
             });
                         
             $('#movieUpdate').click(function(){
-            	var op = "width: 630, height: 500, top: 200, left: 200, location = no, resizable=no";
-            	window.open("/update", "영화 수정", op).resizeTo(630,700);
+            	location.href="/update";
             });
         });

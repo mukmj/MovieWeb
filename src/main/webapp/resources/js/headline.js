@@ -25,6 +25,15 @@ $(document).ready(function(){
     
     $('#list').click(function(){
     	location.href = "/list";
+    	var genre = "";
+		$.ajax({
+			url:"/listGenre",
+			data: {"genre":genre},
+			type: "get"
+		}).done(function(){
+			console.log("success");
+			//location.reload();
+		});
     });
     
     $('#admin').click(function(){

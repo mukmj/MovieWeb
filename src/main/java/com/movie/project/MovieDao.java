@@ -48,8 +48,8 @@ public class MovieDao {
 			mib.setImgUrl(imgUrl);
 			session.insert("movie.imgInsert", mib);
 		}
-		
-		if(type.equals("update")) {
+
+		if(type.equals("update") && imgUrl != "") {
 			session.update("movie.update", mwb);
 			mib.setWriteNo(mwb.getNo());
 			mib.setImgUrl(imgUrl);
@@ -64,7 +64,7 @@ public class MovieDao {
 		genreMap.put("title", sb.getTitle());
 		genreMap.put("openDate", sb.getOpenDate());
 		genreMap.put("genre", genre);
-		
+			
 		movieList = session.selectList("movie.all_search", genreMap);
 		
 		return movieList;

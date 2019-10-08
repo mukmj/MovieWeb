@@ -29,7 +29,13 @@
 			AND LEFT(w.openDate, 7) = '${openDate}'
 		</if>
 	</select>
-	
+	<select id="all_all" resultType="com.movie.project.bean.MovieListBean" parameterType="com.movie.project.bean.MovieListBean">
+		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N'
+	</select>
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})
