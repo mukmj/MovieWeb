@@ -10,7 +10,7 @@
 		SELECT nickname FROM signUp where nickname = #{nickname}
 	</select>
 	<select id="login" resultType="com.movie.project.bean.LoginBean" parameterType="com.movie.project.bean.LoginBean">
-		SELECT id, `password` FROM signUp WHERE id = #{id} AND `password` = #{password}
+		SELECT no, id, `password` FROM signUp WHERE id = #{id} AND `password` = #{password}
 	</select>
 	<insert id="insert" parameterType="com.movie.project.bean.SignUpBean">
 		INSERT INTO signUp (id, `password`, nickname, profileImg) VALUES (#{id}, #{password}, #{nickname}, #{profileImg})

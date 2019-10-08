@@ -1,5 +1,6 @@
 $(document).ready(function(){
             $("#load").load("/headline");
+            $('#score').val(0);
             $('#listBack').click(function(){
             	location.href = "/list";
             });
@@ -48,6 +49,7 @@ $(document).ready(function(){
                 $(this).addClass('on').prevAll('span').addClass('on');
                 
                 var score = $(this).index() + 1;
+                $('#score').val(score);
                 console.log(score);
             });
             
@@ -57,5 +59,12 @@ $(document).ready(function(){
                         
             $('#movieUpdate').click(function(){
             	location.href="/update";
-            });
+            });        
         });
+
+function scoreCheck(){
+	if($('#score').val() == 0){
+		alert("점수를 선택해주세요.");
+		return false;
+	}
+}

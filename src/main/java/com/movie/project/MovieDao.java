@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.movie.project.bean.CommentInsertBean;
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
@@ -79,5 +80,16 @@ public class MovieDao {
 		session.update("movieDelete", no);
 	}
 	
+	public int userNo(String id) {
+		return session.selectOne("comment.userNo", id);
+	}
+
+	public void commentInsert(CommentInsertBean cib) {
+		session.insert("comment.insert", cib);
+	}
+	
+	public void commentList(int movieNo) {
+		session.selectList("comment.select", movieNo);
+	}
 	
 }

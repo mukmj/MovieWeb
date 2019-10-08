@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.movie.project.FileUploadImg;
 import com.movie.project.MovieDao;
+import com.movie.project.bean.CommentInsertBean;
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
@@ -32,6 +33,9 @@ import com.movie.project.bean.SignUpBean;
 public class MainController {
 	int no;
 	String type;
+	String sessionId;
+	int userNo = 0;
+	
 	@Autowired
 	FileUploadImg fud;
 	
@@ -39,7 +43,12 @@ public class MainController {
 	MovieDao md;
 	
 	@RequestMapping("/")
-	public String home(HttpServletRequest req) {
+	public String home(HttpServletRequest req, HttpSession hs) {
+		sessionId = (String)hs.getAttribute("id");
+		if(sessionId != null) {
+			userNo = md.userNo(sessionId);
+		}
+		System.out.println(sessionId + ":" + userNo);
 		return "Main";
 	}
 	
@@ -88,6 +97,7 @@ public class MainController {
 		HttpSession hs = req.getSession();
 		List<LoginBean> lbList = md.login(lb);
 		String result = "";
+
 		if(lbList.isEmpty()) {
 			result = "x";
 		}else {
@@ -153,6 +163,9 @@ public class MainController {
 	public String MovieInfo(HttpServletRequest req) {
 		List<MovieWriteBean> mwList = md.movie(no);
 		req.setAttribute("mwList", mwList);
+		
+		//코멘트
+		md.commentList(no);
 		return "MovieInfo";
 	}
 	
@@ -186,8 +199,11 @@ public class MainController {
 	}
 	
 	@RequestMapping("/comment")
-	public String comment() {
-		
+	public String comment(CommentInsertBean cib, Model m) {
+		System.out.println(sessionId + "랑 " + userNo);
+		cib.setMovieNo(no);
+		cib.setUserNo(userNo);
+		md.commentInsert(cib);
 		return "redirect:/MovieInfo";
 	}
 }

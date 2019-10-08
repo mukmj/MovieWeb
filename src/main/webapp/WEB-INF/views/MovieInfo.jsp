@@ -104,9 +104,10 @@
                                     <span class="a">★</span>
                                     <span class="a">★</span>
                                 </div>
-                                <form action="">
-	                                <textarea id="comment"></textarea><br>
-	                                <button type="submit" class="commentButt">저장</button>
+                                <form action="/comment" onsubmit="return scoreCheck();">
+                                	<input type="hidden" id="score" name="score">
+	                                <textarea id="comment" name="text" required="required"></textarea><br>
+	                                <button type="submit" id="commentSub" class="commentButt">저장</button>
                                 </form>
                             </div>
                             <div class="commentList">
