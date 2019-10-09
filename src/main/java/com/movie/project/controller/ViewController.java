@@ -26,6 +26,4 @@ public class ViewController {
 	public String admin() {
 		return "admin";
 	}
-	
-
 }

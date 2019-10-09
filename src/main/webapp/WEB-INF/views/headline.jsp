@@ -25,15 +25,15 @@
 
         <ul class="nav-login">
 <%
-	String id = (String)session.getAttribute("id");
-	if(id == null){
+	String nickname = (String)session.getAttribute("nickname");
+	if(nickname == null){
 %>         
             <li id="login">로그인</li>
 <%
 	}else{
 %>        
 			<li id="logout">로그아웃</li>
-            <li id="user"><%=id%> 님</li>
+            <li id="user"><%=nickname%> 님</li>
 <%
 	}
 %>

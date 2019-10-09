@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.movie.project.FileUploadImg;
 import com.movie.project.MovieDao;
 import com.movie.project.bean.CommentInsertBean;
+import com.movie.project.bean.CommentListBean;
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
@@ -33,7 +34,7 @@ import com.movie.project.bean.SignUpBean;
 public class MainController {
 	int no;
 	String type;
-	String sessionId;
+	String nickname;
 	int userNo = 0;
 	
 	@Autowired
@@ -44,11 +45,11 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String home(HttpServletRequest req, HttpSession hs) {
-		sessionId = (String)hs.getAttribute("id");
-		if(sessionId != null) {
-			userNo = md.userNo(sessionId);
+		nickname = (String)hs.getAttribute("nickname");
+		if(nickname != null) {
+			userNo = md.userNo(nickname);
 		}
-		System.out.println(sessionId + ":" + userNo);
+		System.out.println(nickname + ":" + userNo);
 		return "Main";
 	}
 	
@@ -96,15 +97,15 @@ public class MainController {
 	public void loginCheck(HttpServletRequest req, HttpServletResponse res, LoginBean lb) throws IOException {
 		HttpSession hs = req.getSession();
 		List<LoginBean> lbList = md.login(lb);
-		String result = "";
+		String nickname = "";
 
 		if(lbList.isEmpty()) {
-			result = "x";
+			nickname = "x";
 		}else {
-			result = lbList.get(0).getId();
-			hs.setAttribute("id", result);
+			nickname = lbList.get(0).getNickname();
+			hs.setAttribute("nickname", nickname);
 		}
-		res.getWriter().print(result);
+		res.getWriter().print(nickname);
 	}
 	
 	@RequestMapping(value="/headline", method = RequestMethod.POST)
@@ -165,7 +166,16 @@ public class MainController {
 		req.setAttribute("mwList", mwList);
 		
 		//코멘트
-		md.commentList(no);
+		List<CommentListBean> commentList = md.commentList(no);
+		req.setAttribute("commentList", commentList);
+		
+		//코멘트 여부 체크
+		HashMap<String, Integer> noMap = new HashMap<String, Integer>();
+		noMap.put("userNo", userNo);
+		noMap.put("movieNo", no);
+		int scoreCheck = md.scoreCheck(noMap);
+		req.setAttribute("scoreCheck", scoreCheck);
+		
 		return "MovieInfo";
 	}
 	
@@ -200,11 +210,20 @@ public class MainController {
 	
 	@RequestMapping("/comment")
 	public String comment(CommentInsertBean cib, Model m) {
-		System.out.println(sessionId + "랑 " + userNo);
+		System.out.println(nickname + "랑 " + userNo);
 		cib.setMovieNo(no);
 		cib.setUserNo(userNo);
 		md.commentInsert(cib);
 		return "redirect:/MovieInfo";
 	}
+	//수정해야함
+	@RequestMapping("/commentDel")
+	public String commentDel() {
+		type="commentDelete";
+		md.commentDel(userNo, type);
+		return "redirect:/MovieInfo";
+	}
+	
+	//https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=61270
 }
 			

@@ -1,3 +1,7 @@
+.container {
+	min-width: 960px;	
+}
+
 .movieCont {
     background-color: aquamarine;
     height: 500px;
@@ -70,6 +74,12 @@
     box-shadow: 3px 3px 5px rgba(157, 6, 6, 0.32);
 }
 
+.commentInfo{
+	clear: both;
+    margin-left: 80px;
+    margin-bottom: 0;
+}
+
 .commentButt {
     margin-top: 20px;
     border: none;
@@ -79,6 +89,12 @@
     font-weight: bold;
     color: whitesmoke;
     background-color: #9d0000;
+}
+
+#commentSub {
+	margin: 0 20px;
+    position: relative;
+    bottom: 9px;
 }
 
 .adminButt {
@@ -101,6 +117,10 @@
     color:#ffc0c0;
     cursor: pointer;
 } 
+
+.scoreStar {
+	color:#ffc0c0;
+}
 
 .on {
     color: #ad0000;
@@ -131,7 +151,7 @@
 
 .commentList-small {
     clear: both;
-    padding: 20 0px;
+    padding: 20px 0px;
 }
 
 .commentleft {

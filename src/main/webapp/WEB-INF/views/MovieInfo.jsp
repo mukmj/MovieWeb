@@ -1,3 +1,4 @@
+<%@page import="com.movie.project.bean.CommentListBean"%>
 <%@page import="java.util.List"%>
 <%@page import="com.movie.project.bean.MovieWriteBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,6 +22,7 @@
     <div id="load"></div>
 <%
 	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
+	int scoreCheck = (int) request.getAttribute("scoreCheck");
 	String path = "http://192.168.3.40/MovieImg/";
 	String genre = "";
 	
@@ -95,6 +97,9 @@
                                 | <i class="icon-comment"></i> <a href="#">3 Comments</a>
                                 | <i class="" style="margin-right: 10px;">39 View</i>
                             </p>
+<%
+	if(scoreCheck != 0) {
+%>                            
                             <div class="commentWrite">
                                 <label>Your Comment</label><br>
                                 <div class="star">
@@ -106,24 +111,58 @@
                                 </div>
                                 <form action="/comment" onsubmit="return scoreCheck();">
                                 	<input type="hidden" id="score" name="score">
-	                                <textarea id="comment" name="text" required="required"></textarea><br>
+	                                <textarea id="comment" name="text" required="required"></textarea>
 	                                <button type="submit" id="commentSub" class="commentButt">저장</button>
                                 </form>
                             </div>
+<%}%>                            
                             <div class="commentList">
+<%
+	String profilePath = "http://192.168.3.40/profileImg/";
+	String nickname = (String)session.getAttribute("nickname");
+	List<CommentListBean> commentList = (List<CommentListBean>)request.getAttribute("commentList");
+	if(commentList != null){
+		for(int i = 0 ; i < commentList.size(); i++) {
+%>                            
+<script>
+$(document).ready(function(){
+	var score = <%=commentList.get(i).getScore()%>;
+	console.log(score);
+	$('.commentInfo').eq(<%=i%>).children('span').eq(score).prevAll('span').addClass('on');
+});
+</script>
                                 <div class="commentList-small">
+                                    <div class="commentInfo" id="test"> 
+										<span class="scoreStar">★</span>
+	                                    <span class="scoreStar">★</span>
+	                                    <span class="scoreStar">★</span>
+	                                    <span class="scoreStar">★</span>
+	                                    <span class="scoreStar">★</span>	                                 
+		                                | <a href="#"><%=commentList.get(i).getNickname()%></a>
+		                                | <%=commentList.get(i).getWriteDate()%>
+		                            </div>
                                     <div class="comment_profile">
-                                        <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png">
+                                        <img src=<%=profilePath + commentList.get(i).getProfileImg() %>>
                                     </div>
                                     <div>
                                         <div class="commentleft">◀</div>
-                                        <div class="comment">asdasdasdasdasdasasdasda</div>
+                                        <div class="comment"><%=commentList.get(i).getText() %></div>
                                     </div>
+<%
+			if(commentList.get(i).getNickname().equals(nickname)){
+%>                                    
                                     <form>
                                     	<button type="submit" class="commentButt">수정</button>
                                     	<button type="submit" class="commentButt">삭제</button>
                                     </form>
+<%
+			}
+%>                                    
                                 </div>
+<%
+		}
+	}
+%>                               
                             </div>
                         </div>
                     </div>

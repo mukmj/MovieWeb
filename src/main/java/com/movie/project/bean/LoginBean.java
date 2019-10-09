@@ -2,6 +2,7 @@ package com.movie.project.bean;
 
 public class LoginBean {
 	private String id;
+	private String nickname;
 	private String password;
 	
 	public String getId() {
@@ -9,6 +10,9 @@ public class LoginBean {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
 	}
 	public String getPassword() {
 		return password;

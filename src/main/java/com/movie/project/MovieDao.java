@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.movie.project.bean.CommentInsertBean;
+import com.movie.project.bean.CommentListBean;
 import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
@@ -80,16 +81,32 @@ public class MovieDao {
 		session.update("movieDelete", no);
 	}
 	
-	public int userNo(String id) {
-		return session.selectOne("comment.userNo", id);
+	public int userNo(String nickname) {
+		return session.selectOne("comment.userNo", nickname);
 	}
 
 	public void commentInsert(CommentInsertBean cib) {
 		session.insert("comment.insert", cib);
 	}
 	
-	public void commentList(int movieNo) {
-		session.selectList("comment.select", movieNo);
+	public List<CommentListBean> commentList(int movieNo) {
+		List<CommentListBean> commentList = session.selectList("comment.select", movieNo);
+		return commentList;
+	}
+	
+	public int scoreCheck(HashMap<String, Integer> noMap) {
+		int score = 0;
+		if(session.selectOne("comment.scoreCheck", noMap) != null) {
+			score = session.selectOne("comment.scoreCheck", noMap);
+		}
+		return score;
+	}
+	
+	public void commentDel(int userNo, String type) {
+		if(type.equals("commentDelete")) {
+			session.update("comment.delete", userNo);
+		}
+		
 	}
 	
 }

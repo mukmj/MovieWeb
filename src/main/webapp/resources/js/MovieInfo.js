@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
             $("#load").load("/headline");
             $('#score').val(0);
             $('#listBack').click(function(){
@@ -59,7 +59,7 @@ $(document).ready(function(){
                         
             $('#movieUpdate').click(function(){
             	location.href="/update";
-            });        
+            });
         });
 
 function scoreCheck(){
