@@ -49,7 +49,6 @@ public class MainController {
 		if(nickname != null) {
 			userNo = md.userNo(nickname);
 		}
-		System.out.println(nickname + ":" + userNo);
 		return "Main";
 	}
 	
@@ -98,13 +97,14 @@ public class MainController {
 		HttpSession hs = req.getSession();
 		List<LoginBean> lbList = md.login(lb);
 		String nickname = "";
-
+	
 		if(lbList.isEmpty()) {
 			nickname = "x";
 		}else {
 			nickname = lbList.get(0).getNickname();
 			hs.setAttribute("nickname", nickname);
 		}
+		
 		res.getWriter().print(nickname);
 	}
 	
@@ -161,7 +161,12 @@ public class MainController {
 	}
 	
 	@RequestMapping("/MovieInfo")
-	public String MovieInfo(HttpServletRequest req) {
+	public String MovieInfo(HttpServletRequest req, HttpSession hs) {
+		nickname = (String)hs.getAttribute("nickname");
+		if(nickname != null) {
+			userNo = md.userNo(nickname);
+		}
+		
 		List<MovieWriteBean> mwList = md.movie(no);
 		req.setAttribute("mwList", mwList);
 		
@@ -216,14 +221,24 @@ public class MainController {
 		md.commentInsert(cib);
 		return "redirect:/MovieInfo";
 	}
-	//수정해야함
+
 	@RequestMapping("/commentDel")
-	public String commentDel() {
-		type="commentDelete";
-		md.commentDel(userNo, type);
+	public String commentDel(CommentInsertBean cib) {
+		cib.setUserNo(userNo);
+		type = "delete";
+		md.commentDelUp(type, cib);
+		System.out.println(userNo);
 		return "redirect:/MovieInfo";
 	}
 	
-	//https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=61270
+	@RequestMapping("/commentUpdate")
+	public String commentUp(CommentInsertBean cib) {
+		cib.setUserNo(userNo);
+		type = "update";
+		System.out.println(cib.getUserNo());
+		md.commentDelUp(type, cib);
+		return "redirect:/MovieInfo";
+	}
+	
 }
 			

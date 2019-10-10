@@ -102,11 +102,11 @@ public class MovieDao {
 		return score;
 	}
 	
-	public void commentDel(int userNo, String type) {
-		if(type.equals("commentDelete")) {
-			session.update("comment.delete", userNo);
+	public void commentDelUp(String type, CommentInsertBean cib) {
+		if(type.equals("delete")) {
+			session.update("comment.delete", cib);
+		}else if(type.equals("update")) {
+			session.update("comment.update", cib);
 		}
-		
 	}
-	
 }

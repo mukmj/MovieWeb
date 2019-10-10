@@ -22,4 +22,7 @@
 	<update id="delete" parameterType="int">
 		update comment set delYn = 'Y' where userNo = #{userNo};
 	</update>
+	<update id="update" parameterType="com.movie.project.bean.CommentInsertBean">
+		update comment set score = #{score}, text = #{text} where userNo = #{userNo} and delYn = 'N';
+	</update>
 </mapper>

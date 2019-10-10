@@ -99,26 +99,6 @@ $(document).ready(function(){
  		
         preview.src = e.target.result;
     })
-    
-    $('#login').click(function (){
-    	var id = $('#loginId').val();
-    	var password = $('#loginPw').val();
-    	
-    	$.ajax({
-    		url: "/loginCheck",
-    		data: {"id": id, "password": password},
-    		type: "post",
-    		success: function(data){
-    			if(data == "x"){
-    				alert("존재하지 않는 아이디입니다.");
-    			}else{
-    				location.href = "/";
-    			}			
-    		}
-    	});
-    });
-  
-    
 });
 
 //중복체크

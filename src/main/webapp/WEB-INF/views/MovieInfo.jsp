@@ -18,11 +18,41 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/resources/js/MovieInfo.js"></script>
 </head>
+<%int scoreCheck = (int) request.getAttribute("scoreCheck");%>
+<script>
+$(document).ready(function(){
+	var scoreCheck = <%=scoreCheck%>;
+
+	if(scoreCheck == 0){
+		$('#scoreInsert').show();
+	}else{
+		$('#scoreInsert').hide();
+	}
+	
+	$('#commentUpdate').click(function(){
+		var comment = $('#commentUpdate').parent().parent().children('div').children('.comment').text();
+		var score = $('#commentUpdate').parent().parent().children('.commentInfo').children('.on').length;
+		
+		$('#scoreInsert').show();
+		$('#comment').val(comment);
+		
+		$('.star').children('.a').eq(score - 1).addClass('on').prevAll('span').addClass('on');
+		
+		$('#commentSub').hide();
+		$('#commentUpSub').show();
+	});
+	
+	$('#commentUpSub').click(function(){
+		alert("수정 완료!");
+		$('#commentSub').show();
+		$('#commentUpSub').hide();
+	});
+});
+</script>
 <body>
     <div id="load"></div>
 <%
 	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
-	int scoreCheck = (int) request.getAttribute("scoreCheck");
 	String path = "http://192.168.3.40/MovieImg/";
 	String genre = "";
 	
@@ -97,10 +127,8 @@
                                 | <i class="icon-comment"></i> <a href="#">3 Comments</a>
                                 | <i class="" style="margin-right: 10px;">39 View</i>
                             </p>
-<%
-	if(scoreCheck != 0) {
-%>                            
-                            <div class="commentWrite">
+                       
+                            <div class="commentWrite" id="scoreInsert">
                                 <label>Your Comment</label><br>
                                 <div class="star">
                                     <span class="a">★</span>
@@ -113,12 +141,12 @@
                                 	<input type="hidden" id="score" name="score">
 	                                <textarea id="comment" name="text" required="required"></textarea>
 	                                <button type="submit" id="commentSub" class="commentButt">저장</button>
+	                                <button type="submit" id="commentUpSub" formaction="/commentUpdate" class="commentButt">수정</button>
                                 </form>
-                            </div>
-<%}%>                            
+                            </div>                          
                             <div class="commentList">
 <%
-	String profilePath = "http://192.168.3.40/profileImg/";
+	String profilePath = "http://192.168.3.40/profile/";
 	String nickname = (String)session.getAttribute("nickname");
 	List<CommentListBean> commentList = (List<CommentListBean>)request.getAttribute("commentList");
 	if(commentList != null){
@@ -128,7 +156,7 @@
 $(document).ready(function(){
 	var score = <%=commentList.get(i).getScore()%>;
 	console.log(score);
-	$('.commentInfo').eq(<%=i%>).children('span').eq(score).prevAll('span').addClass('on');
+	$('.commentInfo').eq(<%=i%>).children('span').eq(score - 1).addClass('on').prevAll('span').addClass('on');
 });
 </script>
                                 <div class="commentList-small">
@@ -151,8 +179,8 @@ $(document).ready(function(){
 <%
 			if(commentList.get(i).getNickname().equals(nickname)){
 %>                                    
-                                    <form>
-                                    	<button type="submit" class="commentButt">수정</button>
+                                    <form action="/commentDel">
+                                    	<button type="button" class="commentButt" id="commentUpdate">수정</button>
                                     	<button type="submit" class="commentButt">삭제</button>
                                     </form>
 <%

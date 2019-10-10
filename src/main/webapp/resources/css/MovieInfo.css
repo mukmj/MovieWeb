@@ -63,6 +63,7 @@
     color: #919191;
 }
 
+
 #comment {
     resize: none;
     width: 600px;
@@ -91,7 +92,7 @@
     background-color: #9d0000;
 }
 
-#commentSub {
+#commentSub, #commentUpSub {
 	margin: 0 20px;
     position: relative;
     bottom: 9px;
