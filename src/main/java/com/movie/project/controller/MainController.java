@@ -114,9 +114,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpSession hs) {
+	public void logout(HttpSession hs, HttpServletRequest req, HttpServletResponse res) throws IOException {
 		hs.invalidate();
-		return "redirect:/";
+		res.sendRedirect(req.getHeader("referer"));
 	}
 	
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
@@ -227,7 +227,7 @@ public class MainController {
 		cib.setUserNo(userNo);
 		type = "delete";
 		md.commentDelUp(type, cib);
-		System.out.println(userNo);
+//		System.out.println(userNo);
 		return "redirect:/MovieInfo";
 	}
 	
@@ -235,10 +235,8 @@ public class MainController {
 	public String commentUp(CommentInsertBean cib) {
 		cib.setUserNo(userNo);
 		type = "update";
-		System.out.println(cib.getUserNo());
 		md.commentDelUp(type, cib);
 		return "redirect:/MovieInfo";
 	}
-	
 }
 			

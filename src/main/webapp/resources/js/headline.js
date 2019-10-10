@@ -41,6 +41,7 @@ $(document).ready(function(){
     });
     
     $('#logout').click(function(){
+    	alert("로그아웃 완료!");
     	location.href = "/logout";
     });
 });
