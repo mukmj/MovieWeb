@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.movie.project.bean.CommentListBean"%>
 <%@page import="java.util.List"%>
 <%@page import="com.movie.project.bean.MovieWriteBean"%>
@@ -19,6 +20,7 @@
     <script src="/resources/js/MovieInfo.js"></script>
 </head>
 <%
+	HashMap<String, Integer> countMap = (HashMap<String, Integer>)request.getAttribute("countMap");
 	int scoreCheck = (int) request.getAttribute("scoreCheck");
 	String nickname = (String)session.getAttribute("nickname");
 %>
@@ -90,9 +92,10 @@ $(document).ready(function(){
                                     </form>
                                 </div>
                             </div>
-                            <p> 
-                                <i class="icon-calendar"></i> Sept 16th, 2012 at 4:20 pm | Admin
-                            </p>
+                            <div class="movieCount"> 
+                                  <span><%=countMap.get("commentCount") %></span> Comments
+                            	| <span><%=countMap.get("movieView")%></span> views 
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -119,11 +122,6 @@ $(document).ready(function(){
                             </div>
                         </div>
                         <div class="commentCont">
-                            <p style="text-align: right"> 
-                                | <i class="icon-comment"></i> <a href="#">3 Comments</a>
-                                | <i class="" style="margin-right: 10px;">39 View</i>
-                            </p>
-                       
                             <div class="commentWrite" id="scoreInsert">
                                 <label>Your Comment</label><br>
                                 <div class="star">

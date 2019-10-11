@@ -29,6 +29,7 @@
 			AND LEFT(w.openDate, 7) = '${openDate}'
 		</if>
 	</select>
+	
 	<select id="all_all" resultType="com.movie.project.bean.MovieListBean" parameterType="com.movie.project.bean.MovieListBean">
 		select w.no, w.title_kor, i.imgUrl, w.openDate, w.genre1
 		from movieWrite w
@@ -36,6 +37,11 @@
 		on w.`no` = i.writeNo
 		where w.delYn = 'N'
 	</select>
+	
+	<select id="movieView" parameterType="int" resultType="int">
+		SELECT sum(viewCount) FROM movieView WHERE movieNo = #{movieNo}
+	</select>
+	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})
@@ -43,6 +49,10 @@
 	
 	<insert id="imgInsert" parameterType="com.movie.project.bean.MovieImgBean">
 		INSERT INTO movieImg (writeNo, imgUrl) VALUES (#{writeNo}, #{imgUrl})
+	</insert>
+	
+	<insert id="viewInsert" parameterType="int">
+		INSERT INTO movieView (movieNo) VALUES (#{no})
 	</insert>
 	
 	<update id="movieDelete" parameterType="int">

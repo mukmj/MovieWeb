@@ -49,6 +49,10 @@ public class MainController {
 		if(nickname != null) {
 			userNo = md.userNo(nickname);
 		}
+		
+		HashMap<String, Object> rankMap = md.rank();
+		req.setAttribute("rankMap", rankMap);
+		
 		return "Main";
 	}
 	
@@ -154,14 +158,15 @@ public class MainController {
 		return "list";
 	}
 	
-	@RequestMapping("/Movie")
-	public String Movie(HttpServletRequest req) {
-		no = Integer.parseInt(req.getParameter("no"));	
-		return "redirect:/MovieInfo";
-	}
+//	@RequestMapping("/Movie")
+//	public void Movie(HttpServletRequest req) {
+//		no = Integer.parseInt(req.getParameter("no"));	
+//		System.out.println(no);
+//	}
 	
-	@RequestMapping("/MovieInfo")
-	public String MovieInfo(HttpServletRequest req, HttpSession hs) {
+	@RequestMapping("/MovieInfo/{no}")
+	public String MovieInfo(HttpServletRequest req, HttpSession hs, @PathVariable("no") int num) {
+		no = num;
 		nickname = (String)hs.getAttribute("nickname");
 		if(nickname != null) {
 			userNo = md.userNo(nickname);
@@ -180,6 +185,11 @@ public class MainController {
 		noMap.put("movieNo", no);
 		int scoreCheck = md.scoreCheck(noMap);
 		req.setAttribute("scoreCheck", scoreCheck);
+		
+		//코멘트 및 뷰 수 
+		md.viewInsert(no);
+		HashMap<String, Integer> countMap = md.infoCount(no);
+		req.setAttribute("countMap", countMap);
 		
 		return "MovieInfo";
 	}

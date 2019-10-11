@@ -1,12 +1,5 @@
 function noCheck(no){
-	$.ajax({
-		url: "/Movie",
-		data: {"no" : no},
-		type: "get"
-	}).done(function(){
-		console.log("success");
-		location.href = "/MovieInfo";
-	});
+	location.href = "/MovieInfo/" + no;
 }
 
 $(document).ready(function(){

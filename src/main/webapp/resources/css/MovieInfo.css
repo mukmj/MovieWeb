@@ -46,6 +46,14 @@
     margin: 0 20px;
 }
 
+.movieCount {
+	text-align: right;
+}
+
+.movieCount span {
+	color: #D9230F;
+}
+
 .commentCont {
     background-color: #f4f4f4;
     height: auto;
@@ -57,7 +65,7 @@
 }
 
 .commentWrite label{
-    margin-top: px;
+    margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
     color: #919191;

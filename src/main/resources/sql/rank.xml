@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rank">
+	<select id="viewRank" resultType="com.movie.project.bean.ViewRankBean">
+		SELECT w.title_kor, sum(v.viewCount) viewCount
+		FROM movieWrite w
+		JOIN movieView v
+		ON w.no = v.movieNo
+		GROUP BY v.movieNo
+		ORDER BY SUM(v.viewCount) desc
+		LIMIT 0, 10 
+	</select>
+	
+	<select id="viewRankImg" resultType="String">
+		SELECT i.imgUrl
+		FROM movieImg i
+		JOIN movieView  v
+		ON i.writeNo = v.movieNo
+		GROUP BY v.movieNo
+		ORDER BY sum(v.viewCount) DESC 
+		LIMIT 0, 1
+	</select>
+	
+	<select id="scoreRank" resultType="com.movie.project.bean.ScoreRankBean">
+		SELECT w.title_kor, round(avg(c.score), 1) score
+		FROM movieWrite w
+		JOIN `comment` c
+		ON w.no = c.movieNo
+		GROUP BY c.movieNo
+		ORDER BY round(avg(c.score), 1) DESC 
+		LIMIT 0, 10
+	</select>
+	
+	<select id="scoreRankImg" resultType="String">
+		SELECT i.imgUrl
+		FROM movieImg i
+		JOIN `comment` c
+		ON i.writeNo = c.movieNo
+		GROUP BY c.movieNo
+		ORDER BY round(avg(c.score), 1) DESC 
+		LIMIT 0, 1
+	</select>
+</mapper>

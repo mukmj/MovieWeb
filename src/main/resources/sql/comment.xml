@@ -6,6 +6,7 @@
 	<select id="userNo" parameterType="String" resultType="int">
 		select no from signUp where nickname = #{nickname}
 	</select>
+	
 	<select id="select" parameterType="int" resultType="com.movie.project.bean.CommentListBean">
 		select s.nickname, s.profileImg, c.score, c.text, c.writeDate
 		from signUp s
@@ -13,15 +14,23 @@
 		on s.`no` = c.userNo
 		where c.movieNo = #{movieNo} and s.delYn = 'N' and c.delYn = 'N'
 	</select>
+	
 	<select id="scoreCheck" resultType="int" parameterType="hashmap">
 		select score from comment where userNo = #{userNo} and movieNo = #{movieNo} and delYn = 'N'
 	</select>
+	
+	<select id="commentCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM `comment` WHERE movieNo = #{movieNo}
+	</select>
+	
 	<insert id="insert" parameterType="com.movie.project.bean.CommentInsertBean">
 		INSERT INTO comment (userNo, movieNo, score, text) VALUES (#{userNo}, #{movieNo}, #{score}, #{text})
 	</insert>
+	
 	<update id="delete" parameterType="int">
 		update comment set delYn = 'Y' where userNo = #{userNo};
 	</update>
+	
 	<update id="update" parameterType="com.movie.project.bean.CommentInsertBean">
 		update comment set score = #{score}, text = #{text} where userNo = #{userNo} and delYn = 'N';
 	</update>

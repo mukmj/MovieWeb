@@ -15,11 +15,30 @@ import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.SearchBean;
 import com.movie.project.bean.SignUpBean;
+import com.movie.project.bean.ViewRankBean;
+import com.movie.project.bean.ScoreRankBean;
 
 @Repository
 public class MovieDao {
 	@Autowired
 	SqlSession session;
+	
+	public HashMap<String, Object> rank() {
+		HashMap<String, Object> rankMap = new HashMap<String, Object>();
+		List<ViewRankBean> viewList = session.selectList("rank.viewRank");
+		List<ScoreRankBean> scoreList = session.selectList("rank.scoreRank");
+		String viewImg = session.selectOne("rank.viewRankImg");
+		String scoreImg = session.selectOne("rank.scoreRankImg");
+		
+		System.out.println(viewList.get(0).getViewCount());
+		System.out.println(scoreList.get(0).getScore());
+		rankMap.put("viewImg", viewImg);
+		rankMap.put("scoreImg", scoreImg);
+		rankMap.put("viewList", viewList);
+		rankMap.put("scoreList", scoreList);
+		
+		return rankMap;
+	}
 	
 	public void SignUpDao(SignUpBean sb) {
 		session.insert("signUp.insert", sb);
@@ -74,7 +93,13 @@ public class MovieDao {
 	
 	public List<MovieWriteBean> movie(int no){
 		List<MovieWriteBean> mwList = session.selectList("movie.movie", no);
+		
+		System.out.println(no);
 		return mwList;
+	}
+	
+	public void viewInsert(int no) {
+		session.insert("movie.viewInsert", no); //뷰 수
 	}
 	
 	public void movieDelete(int no) {
@@ -108,5 +133,12 @@ public class MovieDao {
 		}else if(type.equals("update")) {
 			session.update("comment.update", cib);
 		}
+	}
+	
+	public HashMap<String, Integer> infoCount(int movieNo) {
+		HashMap<String, Integer> countMap = new HashMap<String, Integer>();
+		countMap.put("commentCount", session.selectOne("comment.commentCount", movieNo));
+		countMap.put("movieView", session.selectOne("movie.movieView", movieNo));
+		return countMap;
 	}
 }

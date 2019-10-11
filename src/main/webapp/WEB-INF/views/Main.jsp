@@ -1,3 +1,7 @@
+<%@page import="com.movie.project.bean.ScoreRankBean"%>
+<%@page import="com.movie.project.bean.ViewRankBean"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,6 +26,14 @@
     </script>
 </head>
 <body>
+<%
+	HashMap<String, Object> rankMap = (HashMap<String, Object>)request.getAttribute("rankMap");
+	List<ViewRankBean> viewList = (List<ViewRankBean>)rankMap.get("viewList");
+	List<ScoreRankBean> scoreList = (List<ScoreRankBean>)rankMap.get("scoreList");
+	String viewImg = (String)rankMap.get("viewImg");
+	String scoreImg =(String)rankMap.get("scoreImg");
+	String path = "http://192.168.3.40/MovieImg/";
+%>
     <div id="load"></div>
     <div class="bs-example">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -36,7 +48,7 @@
                 <div class="cont">
                     <div class="img-box-large">
                         <div class="img-box">
-                            <img src="http://www.kobis.or.kr/common/mast/movie/2019/09/18a502eedb5443bc9f9e40f17505f83a.jpg">
+                            <img src=<%=path+viewImg%>>
                         </div>
                     </div>
                     <div class="list-box-large">
@@ -47,16 +59,19 @@
                                     <li class="lbName">영화명</li>
                                     <li class="lbView">View</li>
                                 </ul>
+<%
+	if(viewList != null){
+		for(int i = 0 ; i < viewList.size() ; i++){
+%>                                
                                 <ul class="listCont">
-                                    <li class="lb1">1</li>
-                                    <li class="lbName">asd</li>
-                                    <li class="lbView">12</li>
+                                    <li class="lb1"><%=i + 1%></li>
+                                    <li class="lbName"><%=viewList.get(i).getTitle_kor()%></li>
+                                    <li class="lbView"><%=viewList.get(i).getViewCount()%></li>
                                 </ul>
-                                <ul class="listCont">
-                                    <li class="lb1">2</li>
-                                    <li class="lbName">ddd</li>
-                                    <li class="lbView">1</li>
-                                </ul>
+<%
+		}
+	}
+%>
                             </div>
                         </div>
                     </div>
@@ -66,7 +81,7 @@
                 <div class="cont">
                     <div class="img-box-large">
                         <div class="img-box">
-                            <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/guest/image/EpL2YRegeTQGGzHQgn5dgYF0pgI.png">
+                            <img src=<%=path + scoreImg%>>
                         </div>
                     </div>
                     <div class="list-box-large">
@@ -77,16 +92,19 @@
                                     <li class="lbName">영화명</li>
                                     <li class="lbView">평점</li>
                                 </ul>
+<%
+	if(scoreList != null){
+		for(int i = 0; i < scoreList.size(); i++){
+%>                                
                                 <ul class="listCont">
-                                    <li class="lb1">1</li>
-                                    <li class="lbName">asd</li>
-                                    <li class="lbView">12</li>
+                                    <li class="lb1"><%=i + 1%></li>
+                                    <li class="lbName"><%=scoreList.get(i).getTitle_kor()%></li>
+                                    <li class="lbView"><%=(float)scoreList.get(i).getScore()%></li>
                                 </ul>
-                                <ul class="listCont">
-                                    <li class="lb1">2</li>
-                                    <li class="lbName">ddd</li>
-                                    <li class="lbView">1</li>
-                                </ul>
+<%
+		}
+	}
+%>
                             </div>
                         </div>
                     </div>
