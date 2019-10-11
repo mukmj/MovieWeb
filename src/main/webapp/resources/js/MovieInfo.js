@@ -60,6 +60,28 @@
             $('#movieUpdate').click(function(){
             	location.href="/update";
             });
+            
+    		$('#commentSub').show();
+    		$('#commentUpSub').hide();
+    		
+        	$('#commentUpdate').click(function(){
+        		var comment = $('#commentUpdate').parent().parent().children('div').children('.comment').text();
+        		var score = $('#commentUpdate').parent().parent().children('.commentInfo').children('.on').length;
+        		
+        		$('#scoreInsert').show();
+        		$('#comment').val(comment);
+        		
+        		$('.star').children('.a').eq(score - 1).addClass('on').prevAll('span').addClass('on');
+        		
+        		$('#commentSub').hide();
+        		$('#commentUpSub').show();
+        	});
+        	
+        	$('#commentUpSub').click(function(){
+        		alert("수정 완료!");
+        		$('#commentSub').show();
+        		$('#commentUpSub').hide();
+        	});
         });
 
 function scoreCheck(){

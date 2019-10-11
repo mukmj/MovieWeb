@@ -18,35 +18,31 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/resources/js/MovieInfo.js"></script>
 </head>
-<%int scoreCheck = (int) request.getAttribute("scoreCheck");%>
+<%
+	int scoreCheck = (int) request.getAttribute("scoreCheck");
+	String nickname = (String)session.getAttribute("nickname");
+%>
 <script>
 $(document).ready(function(){
 	var scoreCheck = <%=scoreCheck%>;
-
+	var nick = <%=nickname%>;
+	
 	if(scoreCheck == 0){
 		$('#scoreInsert').show();
 	}else{
 		$('#scoreInsert').hide();
 	}
 	
-	$('#commentUpdate').click(function(){
-		var comment = $('#commentUpdate').parent().parent().children('div').children('.comment').text();
-		var score = $('#commentUpdate').parent().parent().children('.commentInfo').children('.on').length;
-		
-		$('#scoreInsert').show();
-		$('#comment').val(comment);
-		
-		$('.star').children('.a').eq(score - 1).addClass('on').prevAll('span').addClass('on');
-		
+	if(nick == null){
+		$('#comment').attr('readonly','readonly');
+		$('#comment').val("로그인 후 작성 가능합니다.");
 		$('#commentSub').hide();
-		$('#commentUpSub').show();
-	});
-	
-	$('#commentUpSub').click(function(){
-		alert("수정 완료!");
-		$('#commentSub').show();
-		$('#commentUpSub').hide();
-	});
+		
+		$('#comment').click(function(){
+			alert("로그인 화면으로 이동합니다.");
+			location.href = "/login";
+		});
+	}
 });
 </script>
 <body>
@@ -147,7 +143,6 @@ $(document).ready(function(){
                             <div class="commentList">
 <%
 	String profilePath = "http://192.168.3.40/profile/";
-	String nickname = (String)session.getAttribute("nickname");
 	List<CommentListBean> commentList = (List<CommentListBean>)request.getAttribute("commentList");
 	if(commentList != null){
 		for(int i = 0 ; i < commentList.size(); i++) {
