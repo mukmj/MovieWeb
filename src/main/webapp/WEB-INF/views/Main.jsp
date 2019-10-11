@@ -99,7 +99,7 @@
                                 <ul class="listCont">
                                     <li class="lb1"><%=i + 1%></li>
                                     <li class="lbName"><%=scoreList.get(i).getTitle_kor()%></li>
-                                    <li class="lbView"><%=(float)scoreList.get(i).getScore()%></li>
+                                    <li class="lbView"><%=scoreList.get(i).getScore()%></li>
                                 </ul>
 <%
 		}
@@ -124,7 +124,6 @@
 </div>
     <div class="container">
         <div class="">
-
         </div>
     </div>
 </body>

@@ -30,8 +30,6 @@ public class MovieDao {
 		String viewImg = session.selectOne("rank.viewRankImg");
 		String scoreImg = session.selectOne("rank.scoreRankImg");
 		
-		System.out.println(viewList.get(0).getViewCount());
-		System.out.println(scoreList.get(0).getScore());
 		rankMap.put("viewImg", viewImg);
 		rankMap.put("scoreImg", scoreImg);
 		rankMap.put("viewList", viewList);
@@ -78,17 +76,31 @@ public class MovieDao {
 		}
 	}
 	
-	public List<MovieListBean> movieList(String genre, SearchBean sb) {
+	public List<MovieListBean> movieList(String genre, SearchBean sb, int count) {
 		List<MovieListBean> movieList = null;
+		HashMap<String, Object> genreMap = new HashMap<String, Object>();
+		
+		genreMap.put("title", sb.getTitle());
+		genreMap.put("openDate", sb.getOpenDate());
+		genreMap.put("genre", genre);
+		genreMap.put("count", count);
+		
+		System.out.println(count);
+		movieList = session.selectList("movie.all_search", genreMap);
+		
+		return movieList;
+	}
+	
+	public int movieCount(String genre, SearchBean sb) {
 		HashMap<String, String> genreMap = new HashMap<String, String>();
 		
 		genreMap.put("title", sb.getTitle());
 		genreMap.put("openDate", sb.getOpenDate());
 		genreMap.put("genre", genre);
-			
-		movieList = session.selectList("movie.all_search", genreMap);
 		
-		return movieList;
+		int listCount = session.selectOne("paging.listCount", genreMap);
+		
+		return listCount;
 	}
 	
 	public List<MovieWriteBean> movie(int no){
@@ -140,5 +152,9 @@ public class MovieDao {
 		countMap.put("commentCount", session.selectOne("comment.commentCount", movieNo));
 		countMap.put("movieView", session.selectOne("movie.movieView", movieNo));
 		return countMap;
+	}
+	
+	public void paging(int count) {
+		
 	}
 }

@@ -27,15 +27,15 @@
 <script>
 $(document).ready(function(){
 	var scoreCheck = <%=scoreCheck%>;
-	var nick = <%=nickname%>;
+	var nick = "<%=nickname%>";
 	
-	if(scoreCheck == 0){
+	if(scoreCheck == 0 || nick == "null"){
 		$('#scoreInsert').show();
 	}else{
 		$('#scoreInsert').hide();
 	}
 	
-	if(nick == null){
+	if(nick == "null"){
 		$('#comment').attr('readonly','readonly');
 		$('#comment').val("로그인 후 작성 가능합니다.");
 		$('#commentSub').hide();
@@ -44,6 +44,14 @@ $(document).ready(function(){
 			alert("로그인 화면으로 이동합니다.");
 			location.href = "/login";
 		});
+	}
+	
+	$('#movieUpdate').hide();
+	$('#movieDelete').hide();
+	
+	if(nick == "admin"){
+		$('#movieUpdate').show();
+		$('#movieDelete').show();	
 	}
 });
 </script>

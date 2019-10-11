@@ -10,33 +10,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/headline.js"></script>
 </head>
+<%String nickname = (String)session.getAttribute("nickname");%>
+<script>
+$(document).ready(function(){
+	var nick = "<%=nickname%>";
+
+	$('#admin').hide();
+	
+	if(nick != "null"){
+		$('#login').hide();
+		$('#user').show();
+		$('#logout').show();
+	}else{
+		$('#logout').hide();
+		$('#user').hide();
+	}
+	
+	if(nick == "admin"){
+		$('#admin').show();
+	}
+});
+</script>
 <body>
+
     <header>
     </header>
     <nav>
         <ul class="nav-logo">
             <li>MovieWeb</li>
         </ul>
+        
         <ul class="nav-list">
             <li id="home">Home</li>
-            <li id="list">Movie</li>
+            <li id="list">Movie</li>      
             <li id="admin">Admin</li>
         </ul>
 
-        <ul class="nav-login">
-<%
-	String nickname = (String)session.getAttribute("nickname");
-	if(nickname == null){
-%>         
+        <ul class="nav-login">  
             <li id="login">로그인</li>
-<%
-	}else{
-%>        
 			<li id="logout">로그아웃</li>
             <li id="user"><%=nickname%> 님</li>
-<%
-	}
-%>
         </ul>
     </nav>
 </body>

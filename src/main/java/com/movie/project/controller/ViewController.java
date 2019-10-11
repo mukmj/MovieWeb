@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ViewController {
+	
 	@GetMapping("/headline")
 	public String headline() {
 		return "headline";

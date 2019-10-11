@@ -2,6 +2,7 @@ $(document).ready(function(){
     var tp;
     var index;
     var address = document.location.href.split('/')[3];
+
     $('.nav-list li').eq(0).addClass('select');
     
     if(address == "list" || address == "MovieInfo"){

@@ -28,6 +28,7 @@
 			AND (w.title_kor LIKE '%${title}%' or w.title_eng LIKE '%${title}%')
 			AND LEFT(w.openDate, 7) = '${openDate}'
 		</if>
+		limit #{count}, 20
 	</select>
 	
 	<select id="all_all" resultType="com.movie.project.bean.MovieListBean" parameterType="com.movie.project.bean.MovieListBean">

@@ -15,6 +15,40 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/list.js"></script>
+   <%int movieCount = (int) request.getAttribute("movieCount"); %>
+    <script>
+    	$(document).ready(function(){
+    		var tot = <%=movieCount%>;
+    		var listCount = 20;
+    		var pagingIndex = Math.ceil(tot / listCount);
+    		var count = 0;
+    		
+    		$('#pagingStart').empty();
+    		for(var i = 0; i < pagingIndex; i++){
+            	var html = "<span>"+(i + 1)+"</span>";
+    			$('#pagingStart').append(html);
+    		}
+    				
+    		$('#pagingStart span').click(function(){
+    			count = ($('#pagingStart span').index(this)) * listCount;
+    			
+    			$('#all').click(function(){
+    				count = 0;
+    			});
+    			
+    			$.ajax({
+    				url: "/paging",
+    				type: "get",
+    				data: {"count":count}
+    			});
+    			
+  				console.log(count);
+    			location.href =  "/list";
+    		});		
+    		
+
+    	});
+    </script>
 </head>
 <body>
     <div id="load"></div>
@@ -70,8 +104,13 @@
 <%
 		}
 	}
-%>                    
+%>                 
                 </div>
+                <div id="paging">
+                	<span class="block">&laquo;</span>
+                	<span id="pagingStart"></span>
+                	<span class="block">&raquo;</span>
+            	</div>   
             </div>
         </div>
     </div>

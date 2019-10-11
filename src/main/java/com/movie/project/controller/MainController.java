@@ -35,6 +35,8 @@ public class MainController {
 	int no;
 	String type;
 	String nickname;
+	String genre = "";
+	int count;
 	int userNo = 0;
 	
 	@Autowired
@@ -42,6 +44,7 @@ public class MainController {
 	
 	@Autowired
 	MovieDao md;
+
 	
 	@RequestMapping("/")
 	public String home(HttpServletRequest req, HttpSession hs) {
@@ -138,31 +141,32 @@ public class MainController {
 		return "redirect: /admin";
 	}
 	
-
-	String genre = "";
 	@RequestMapping("/listGenre")
 	public String listView(Model m, HttpServletRequest req) {
 		genre = req.getParameter("genre");
 		return "redirect:/list";
 	}
 	
+	@RequestMapping("/paging")
+	public void paging(HttpServletRequest req) {
+		count = Integer.parseInt(req.getParameter("count"));
+	}
+	
 	@RequestMapping("/list")
 	public String list(Model m, HttpServletRequest req, SearchBean sb) {
 		if(genre == "") {
 			genre = "전체";
+			count = 0;
 		}
-		
-		List<MovieListBean> movieList = md.movieList(genre, sb);
+	
+		List<MovieListBean> movieList = md.movieList(genre, sb, count);
 		m.addAttribute("movieList", movieList);
-
+		
+		int movieCount = md.movieCount(genre, sb);
+		m.addAttribute("movieCount", movieCount);
+			
 		return "list";
 	}
-	
-//	@RequestMapping("/Movie")
-//	public void Movie(HttpServletRequest req) {
-//		no = Integer.parseInt(req.getParameter("no"));	
-//		System.out.println(no);
-//	}
 	
 	@RequestMapping("/MovieInfo/{no}")
 	public String MovieInfo(HttpServletRequest req, HttpSession hs, @PathVariable("no") int num) {
@@ -220,7 +224,7 @@ public class MainController {
 		mwb.setNo(no);
 		type = "update"; 
 		md.MovieWrite(type, mwb, imgUrl);
-		return "redirect:/MovieInfo";
+		return "redirect:/MovieInfo/" + no;
 	}
 	
 	@RequestMapping("/comment")
@@ -229,7 +233,7 @@ public class MainController {
 		cib.setMovieNo(no);
 		cib.setUserNo(userNo);
 		md.commentInsert(cib);
-		return "redirect:/MovieInfo";
+		return "redirect:/MovieInfo/" + no;
 	}
 
 	@RequestMapping("/commentDel")
@@ -238,7 +242,7 @@ public class MainController {
 		type = "delete";
 		md.commentDelUp(type, cib);
 //		System.out.println(userNo);
-		return "redirect:/MovieInfo";
+		return "redirect:/MovieInfo/" + no;
 	}
 	
 	@RequestMapping("/commentUpdate")
@@ -246,7 +250,7 @@ public class MainController {
 		cib.setUserNo(userNo);
 		type = "update";
 		md.commentDelUp(type, cib);
-		return "redirect:/MovieInfo";
+		return "redirect:/MovieInfo" + no;
 	}
 }
 			
