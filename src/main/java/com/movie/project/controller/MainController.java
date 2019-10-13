@@ -226,6 +226,7 @@ public class MainController {
 		mwb.setNo(no);
 		type = "update"; 
 		md.MovieWrite(type, mwb, imgUrl);
+		System.out.println(mwb.getGenre1());
 		return "redirect:/MovieInfo/" + no;
 	}
 	

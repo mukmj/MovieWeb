@@ -17,7 +17,6 @@
     <script type="text/javascript" src="/resources/js/list.js"></script>
    <%int movieCount = (int) request.getAttribute("movieCount"); %>
     <script>
-    	var color;
     	$(document).ready(function(){
     		var tot = <%=movieCount%>;
     		var listCount = 20;
@@ -33,7 +32,6 @@
     		$('#pagingStart span').click(function(){
     			count = ($('#pagingStart span').index(this)) * listCount;
   				console.log($('#pagingStart span').index(this));
-  				color = $('#pagingStart span').index(this);
     			location.href =  "/list?&count=" + count;
     		});		
     	});
@@ -54,6 +52,8 @@
                     <li class="nav-item">로맨스</li>
                     <li class="nav-item">범죄</li>
                     <li class="nav-item">액션</li>
+                    <li class="nav-item">미스터리</li>
+                    <li class="nav-item">애니메이션</li>
                </ul>
            </div>
         </div>

@@ -89,6 +89,8 @@
 	                                <option value="로맨스">로맨스</option>
 	                                <option value="범죄">범죄</option>
 	                                <option value="액션">액션</option>
+	                                <option value="미스터리">미스터리</option>
+	                                <option value="애니메이션">애니메이션</option>
 	                            </select>
 	    					</div>		
 	    					<div class="col-sm-6 form-group plus">
@@ -111,6 +113,8 @@
 	                                <option value="로맨스">로맨스</option>
 	                                <option value="범죄">범죄</option>
 	                                <option value="액션">액션</option>
+	                                <option value="미스터리">미스터리</option>
+	                                <option value="애니메이션">애니메이션</option>
 	                            </select>
 	    					</div>		
 	    				</div>

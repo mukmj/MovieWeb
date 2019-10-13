@@ -73,6 +73,8 @@ public class MovieDao {
 			mib.setWriteNo(mwb.getNo());
 			mib.setImgUrl(imgUrl);
 			session.update("movie.imgUpdate", mib);
+		} else if(type.equals("update")){
+			session.update("movie.update", mwb);
 		}
 	}
 	

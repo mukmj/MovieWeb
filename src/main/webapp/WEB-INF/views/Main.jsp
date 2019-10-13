@@ -24,10 +24,20 @@
 	$(document).ready(function(){
 	    $("#load").load("/headline");
 	    
-	    $('.listCont').click(function(){
+	    $('.viewList').click(function(){
 	    	var index = $(this).index() - 1;
-	    	console.log(index);
-	    	var title = $('.listCont .lbName').eq(index).text();
+	    	var title = $('.viewList').eq(index).children('.lbName').text();
+	    	$.ajax({
+	    		url: "/titleCheck",
+	    		data: {"title": title}
+	    	}).done(function(no){
+	    		location.href = "/MovieInfo/" + no
+	    	});
+	    });
+	    
+	    $('.scoreList').click(function(){
+	    	var index = $(this).index() - 1;
+	    	var title = $('.scoreList').eq(index).children('.lbName').text();
 	    	$.ajax({
 	    		url: "/titleCheck",
 	    		data: {"title": title}
@@ -76,7 +86,7 @@
 	if(viewList != null){
 		for(int i = 0 ; i < viewList.size() ; i++){
 %>                                
-                                <ul class="listCont">
+                                <ul class="listCont viewList">                            
                                     <li class="lb1"><%=i + 1%></li>
                                     <li class="lbName"><%=viewList.get(i).getTitle_kor()%></li>
                                     <li class="lbView"><%=viewList.get(i).getViewCount()%></li>
@@ -109,7 +119,7 @@
 	if(scoreList != null){
 		for(int i = 0; i < scoreList.size(); i++){
 %>                                
-                                <ul class="listCont">
+                                <ul class="listCont scoreList">
                                     <li class="lb1"><%=i + 1%></li>
                                     <li class="lbName"><%=scoreList.get(i).getTitle_kor()%></li>
                                     <li class="lbView"><%=scoreList.get(i).getScore()%></li>
