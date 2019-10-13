@@ -154,7 +154,7 @@ public class MovieDao {
 		return countMap;
 	}
 	
-	public void paging(int count) {
-		
+	public int titleCheck(String title) {
+		return session.selectOne("movie.titleCheck", title);
 	}
 }

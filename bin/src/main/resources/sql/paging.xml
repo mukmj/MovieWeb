@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paging">
+	<select id="listCount" resultType="int" parameterType="hashmap">
+		select count(*)
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N'
+		<if test="genre != '전체'">and (w.genre1 = #{genre} or w.genre2 = #{genre})</if>
+		<if test="title != null and openDate == ''">AND w.title_kor LIKE '%${title}%' or w.title_eng LIKE '%${title}%'</if>
+		<if test="title == '' and openDate != null">AND LEFT(w.openDate, 7) = '${openDate}'</if>
+		<if test="title != null and openDate != null">
+			AND (w.title_kor LIKE '%${title}%' or w.title_eng LIKE '%${title}%')
+			AND LEFT(w.openDate, 7) = '${openDate}'
+		</if>
+	</select>
+	
+	<select id="all_all" resultType="int" parameterType="com.movie.project.bean.MovieListBean">
+		select count(*)
+		from movieWrite w
+		join movieImg i
+		on w.`no` = i.writeNo
+		where w.delYn = 'N'
+	</select>
+</mapper>

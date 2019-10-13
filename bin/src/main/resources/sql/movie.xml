@@ -43,10 +43,6 @@
 		SELECT sum(viewCount) FROM movieView WHERE movieNo = #{movieNo}
 	</select>
 	
-	<select id="titleCheck" parameterType="String" resultType="int">
-		SELECT no FROM movieWrite WHERE title_kor = #{title}
-	</select>
-	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})

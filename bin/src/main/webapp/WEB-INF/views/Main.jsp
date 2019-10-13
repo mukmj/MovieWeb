@@ -20,22 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="/resources/js/main.js"></script>
     <script>
-    
-	$(document).ready(function(){
-	    $("#load").load("/headline");
-	    
-	    $('.listCont').click(function(){
-	    	var index = $(this).index() - 1;
-	    	console.log(index);
-	    	var title = $('.listCont .lbName').eq(index).text();
-	    	$.ajax({
-	    		url: "/titleCheck",
-	    		data: {"title": title}
-	    	}).done(function(no){
-	    		location.href = "/MovieInfo/" + no
-	    	});
+   $(document).ready(function(){
+	        $("#load").load("/headline");
 	    });
-	});
     </script>
 </head>
 <body>

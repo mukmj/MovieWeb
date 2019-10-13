@@ -2,11 +2,10 @@ $(document).ready(function(){
     var tp;
     var index;
     var address = document.location.href.split('/')[3];
-    var list = document.location.href.lastIndexOf('/') + 1;
-    var listAddr = document.location.href.substr(list, 4);
+
     $('.nav-list li').eq(0).addClass('select');
     
-    if(listAddr == "list" || address == "MovieInfo"){
+    if(address == "list" || address == "MovieInfo"){
     	 $('.nav-list li').eq(0).removeClass('select');
       	 $('.nav-list li').eq(1).addClass('select');
       	 index = 1;

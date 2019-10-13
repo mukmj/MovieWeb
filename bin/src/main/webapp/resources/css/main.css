@@ -108,9 +108,6 @@ body {
 
 .listCont{
     color: white;
-    cursor: pointer;
 }
 
-.listCont:hover {
-	background-color: rgb(144, 0, 0);
-}
+

@@ -147,18 +147,20 @@ public class MainController {
 		return "redirect:/list";
 	}
 	
-	@RequestMapping("/paging")
-	public void paging(HttpServletRequest req) {
-		count = Integer.parseInt(req.getParameter("count"));
-	}
-	
 	@RequestMapping("/list")
 	public String list(Model m, HttpServletRequest req, SearchBean sb) {
 		if(genre == "") {
 			genre = "전체";
 			count = 0;
 		}
-	
+		
+		String no = req.getParameter("count");
+		if(no == null) {
+			no = "0";
+		}
+		
+		count = Integer.parseInt(no);
+		
 		List<MovieListBean> movieList = md.movieList(genre, sb, count);
 		m.addAttribute("movieList", movieList);
 		
@@ -251,6 +253,13 @@ public class MainController {
 		type = "update";
 		md.commentDelUp(type, cib);
 		return "redirect:/MovieInfo" + no;
+	}
+	
+	@RequestMapping("/titleCheck")
+	public void titleCheck(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		String title = req.getParameter("title");
+		int movieNo = md.titleCheck(title);
+		res.getWriter().print(movieNo);
 	}
 }
 			

@@ -17,7 +17,6 @@
     <script type="text/javascript" src="/resources/js/list.js"></script>
    <%int movieCount = (int) request.getAttribute("movieCount"); %>
     <script>
-    	var color;
     	$(document).ready(function(){
     		var tot = <%=movieCount%>;
     		var listCount = 20;
@@ -32,10 +31,22 @@
     				
     		$('#pagingStart span').click(function(){
     			count = ($('#pagingStart span').index(this)) * listCount;
-  				console.log($('#pagingStart span').index(this));
-  				color = $('#pagingStart span').index(this);
-    			location.href =  "/list?&count=" + count;
+    			
+    			$('#all').click(function(){
+    				count = 0;
+    			});
+    			
+    			$.ajax({
+    				url: "/paging",
+    				type: "get",
+    				data: {"count":count}
+    			});
+    			
+  				console.log(count);
+    			location.href =  "/list";
     		});		
+    		
+
     	});
     </script>
 </head>
