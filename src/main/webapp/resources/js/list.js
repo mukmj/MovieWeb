@@ -4,7 +4,7 @@ function noCheck(no){
 
 $(document).ready(function(){
 	$("#load").load("/headline");
-	
+
 	$('#searchText .nav-item').click(function(){
 		var i = $(this).index();
 		

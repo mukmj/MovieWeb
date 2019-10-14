@@ -56,7 +56,7 @@
 	</select>
 	
 	<!-- 평균 평점 -->
-	<select id="scoreAvg" parameterType="int" resultType="int">
+	<select id="scoreAvg" parameterType="int" resultType="float">
 		SELECT round(AVG(score), 1) scoreAvg FROM `comment`
 		WHERE movieNo = #{movieNo}
 	</select>

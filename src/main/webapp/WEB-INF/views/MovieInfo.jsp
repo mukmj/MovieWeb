@@ -24,6 +24,8 @@
 <%
 	HashMap<String, Integer> countMap = (HashMap<String, Integer>)request.getAttribute("countMap");
 	int scoreCheck = (int) request.getAttribute("scoreCheck");
+	float scoreAvg = (float) request.getAttribute("scoreAvg");
+	int scoreAvgInt = (int) scoreAvg;
 	String nickname = (String)session.getAttribute("nickname");
 	HashMap<String, Integer> scoreCnt = (HashMap<String, Integer>) request.getAttribute("scoreCnt");
 %>
@@ -102,6 +104,18 @@ $(document).ready(function(){
 	        }
         }
 	});
+	
+	//평점 평균
+	var scoreAvg = <%=scoreAvg%>;
+	var scoreAvg2 = <%=scoreAvgInt%>;
+	var result = scoreAvg2 - scoreAvg;
+	
+	$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).addClass('on').prevAll('span').addClass('on');
+	$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).text("★").prevAll('span').text("★");
+	if(result != 0){
+		$('.scoreavgBox').children('span').eq(scoreAvg2).text("★");
+	}
+	
 });
 </script>
 <body>
@@ -180,12 +194,12 @@ $(document).ready(function(){
 										<div class="scoreText">
 											<span>평균</span>
 											<div class="scoreavgBox">
-			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
-			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
-			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
-			                                    <span class="scoreStar">★</span>
 			                                    <span class="scoreStar">☆</span>
-			                                    <span>3.5</span>
+			                                    <span class="scoreStar">☆</span>
+			                                    <span class="scoreStar">☆</span>
+			                                    <span class="scoreStar">☆</span>
+			                                    <span class="scoreStar">☆</span>
+			                                    <span><%=scoreAvg%></span>
 			                                </div>
 										</div>
                                     </div>

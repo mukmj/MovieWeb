@@ -82,12 +82,15 @@ body {
     margin: 0;
     padding: 0;
     border-top: 1px solid #d0d0d0;
-    height: 7%;
+    box-sizing: border-box;
+    height: calc(350px / 11);
 }
 
 .list-box-small ul li {
     float: left;
     text-align: center;
+    height: 100%;
+    line-height: 30px;
 }
 
 .listTitle {
@@ -100,6 +103,7 @@ body {
 
 .lbName {
     width: 60%;
+    height: calc
 }
 
 .lbView {
@@ -109,6 +113,10 @@ body {
 .listCont{
     color: white;
     cursor: pointer;
+}
+
+.listCont ul{
+	
 }
 
 .listCont:hover {

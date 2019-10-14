@@ -164,7 +164,11 @@ public class MovieDao {
 		return scoreCnt;
 	}
 	
-	public int scoreAvg(int movieNo) {
-		return session.selectOne("movie.scoreAvg", movieNo);
+	public float scoreAvg(int movieNo) {
+		float scoreAvg = 0;
+		if(session.selectOne("movie.scoreAvg", movieNo) != null) {
+			scoreAvg = session.selectOne("movie.scoreAvg", movieNo);
+		}
+		return scoreAvg;
 	}
 }

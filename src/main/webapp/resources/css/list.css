@@ -9,13 +9,13 @@ html {
 
 .genre-nav {
     width: 200px;
-    height: 100%;
     float: left;
+    height: 2140px;
+    background-color: #854646;
 }
 
 .list-cont {
     width:calc(100% - 200px);
-    height: 600px;
     float: right;
 }
 
@@ -25,21 +25,25 @@ html {
 
 .left_bar {
     width:100%;
-    background:rgb(190, 153, 153);
     height:100vh;
+    background-color: #854646;
+    z-index: 1;
 }
 
 .nav-tabs--vertical {
-    padding-top: 30px;
+    padding-top: 42px;
 }
 
 .nav-item {
     width: 100%;
     padding: 10px 15px;
+    color: white;
 }
 
 .nav-item:hover {
     background-color: rgb(226, 186, 186);
+    color: #550000;
+	transition-duration: 1s;
 }
 
 .nav-link {
@@ -165,8 +169,11 @@ html {
     .col-sm-4{
         width: 20% !important;
     }
+    
+	 .genre-nav {
+    	height: 1763px;
+    }
 }
-
 .select {
     background-color: #9d0000;
     border-top-left-radius: 10px;

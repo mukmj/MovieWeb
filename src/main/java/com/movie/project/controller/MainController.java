@@ -219,9 +219,10 @@ public class MainController {
 		req.setAttribute("scoreCnt", scoreMap);
 		
 		//평점 평균
-		int scoreAvg = md.scoreAvg(no);
+		float scoreAvg = md.scoreAvg(no);
+		int scoreAvg2 = (int) scoreAvg;
 		req.setAttribute("scoreAvg", scoreAvg);
-		
+		System.out.println(scoreAvg + ":" + scoreAvg2);
 		return "MovieInfo";
 	}
 	

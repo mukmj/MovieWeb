@@ -199,6 +199,9 @@
 
 .scoreText {
 	float: left;
+	margin-left: 30px;
+    font-size: 28px;
+    color: #525252;
 }
 
 .col-12 {
