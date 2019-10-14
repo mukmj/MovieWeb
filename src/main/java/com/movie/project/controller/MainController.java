@@ -28,6 +28,7 @@ import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
 import com.movie.project.bean.ScoreCntBean;
+import com.movie.project.bean.ScoreRankBean;
 import com.movie.project.bean.SearchBean;
 import com.movie.project.bean.SignUpBean;
 
@@ -216,6 +217,10 @@ public class MainController {
 		}
 		
 		req.setAttribute("scoreCnt", scoreMap);
+		
+		//평점 평균
+		int scoreAvg = md.scoreAvg(no);
+		req.setAttribute("scoreAvg", scoreAvg);
 		
 		return "MovieInfo";
 	}

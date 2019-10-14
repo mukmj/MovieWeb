@@ -179,7 +179,14 @@ $(document).ready(function(){
                                     	</div>
 										<div class="scoreText">
 											<span>평균</span>
-											<span>3.5</span>
+											<div class="scoreavgBox">
+			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
+			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
+			                                    <span class="scoreStar" style="color: rgb(154, 0, 0)">★</span>
+			                                    <span class="scoreStar">★</span>
+			                                    <span class="scoreStar">☆</span>
+			                                    <span>3.5</span>
+			                                </div>
 										</div>
                                     </div>
                                 </div>

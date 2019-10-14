@@ -163,4 +163,8 @@ public class MovieDao {
 		List<ScoreCntBean> scoreCnt = session.selectList("movie.scoreChart", movieNo);
 		return scoreCnt;
 	}
+	
+	public int scoreAvg(int movieNo) {
+		return session.selectOne("movie.scoreAvg", movieNo);
+	}
 }

@@ -55,6 +55,12 @@
 		HAVING (score = 1 OR score = 2 OR score = 3 OR score = 4 OR score = 5)
 	</select>
 	
+	<!-- 평균 평점 -->
+	<select id="scoreAvg" parameterType="int" resultType="int">
+		SELECT round(AVG(score), 1) scoreAvg FROM `comment`
+		WHERE movieNo = #{movieNo}
+	</select>
+	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})
