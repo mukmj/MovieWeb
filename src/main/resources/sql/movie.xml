@@ -47,6 +47,14 @@
 		SELECT no FROM movieWrite WHERE title_kor = #{title}
 	</select>
 	
+	<!-- 평점 차트 -->
+	<select id="scoreChart" resultType="com.movie.project.bean.ScoreCntBean" parameterType="int">
+		SELECT score, COUNT(score) scoreCnt FROM `comment`
+		WHERE movieNo = #{movieNo}
+		GROUP BY score
+		HAVING (score = 1 OR score = 2 OR score = 3 OR score = 4 OR score = 5)
+	</select>
+	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">
 		INSERT INTO movieWrite (title_kor, title_eng, plot, movieTime, nation, openDate, producer, company, genre1, genre2) 
 		VALUES (#{title_kor}, #{title_eng}, #{plot}, #{movieTime}, #{nation}, #{openDate}, #{producer}, #{company}, #{genre1}, #{genre2})

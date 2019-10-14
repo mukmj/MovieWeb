@@ -29,8 +29,9 @@ $(document).ready(function(){
     				alert("비밀번호를 입력하세요.");
     			}else if(data == "x"){
     				alert("존재하지 않는 아이디입니다.");
+    			}else if(document.referrer.split('/')[3] == "login"){
+    				location.href = "/";
     			}else if(data != null){
-    				//location.href="/";
     				location.href = document.referrer;    				
     			}			
     		}

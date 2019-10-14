@@ -6,6 +6,7 @@
             });
             
             $imgSrc = $('#imgProfile').attr('src');
+            
             function readURL(input) {
 
                 if (input.files && input.files[0]) {
@@ -18,6 +19,7 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+            
             $('#btnChangePicture').on('click', function () {
                 // document.getElementById('profilePicture').click();
                 if (!$('#btnChangePicture').hasClass('changing')) {

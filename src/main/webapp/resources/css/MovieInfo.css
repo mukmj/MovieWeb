@@ -186,3 +186,17 @@
 .commentList {
     margin: 20px 20px;
 }
+
+.chart {
+	width: 50% !important;
+	height: 50% !important;
+	float: left;
+}
+
+.scoreText {
+	float: left;
+}
+
+.col-12 {
+	margin-bottom: 20px;
+}

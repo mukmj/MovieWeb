@@ -13,6 +13,7 @@ import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
+import com.movie.project.bean.ScoreCntBean;
 import com.movie.project.bean.SearchBean;
 import com.movie.project.bean.SignUpBean;
 import com.movie.project.bean.ViewRankBean;
@@ -59,7 +60,7 @@ public class MovieDao {
 		int no = 0;
 		
 		MovieImgBean mib = new MovieImgBean();
-		System.out.println(mwb.getNo());
+
 		if(type.equals("insert")) {
 			session.insert("movie.insert", mwb);
 			no = session.selectOne("movie.writeNo", mwb.getTitle_kor());
@@ -86,8 +87,7 @@ public class MovieDao {
 		genreMap.put("openDate", sb.getOpenDate());
 		genreMap.put("genre", genre);
 		genreMap.put("count", count);
-		
-		System.out.println(count);
+
 		movieList = session.selectList("movie.all_search", genreMap);
 		
 		return movieList;
@@ -108,7 +108,6 @@ public class MovieDao {
 	public List<MovieWriteBean> movie(int no){
 		List<MovieWriteBean> mwList = session.selectList("movie.movie", no);
 		
-		System.out.println(no);
 		return mwList;
 	}
 	
@@ -158,5 +157,10 @@ public class MovieDao {
 	
 	public int titleCheck(String title) {
 		return session.selectOne("movie.titleCheck", title);
+	}
+	
+	public List<ScoreCntBean> scoreChart(int movieNo){
+		List<ScoreCntBean> scoreCnt = session.selectList("movie.scoreChart", movieNo);
+		return scoreCnt;
 	}
 }

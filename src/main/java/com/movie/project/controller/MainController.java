@@ -27,6 +27,7 @@ import com.movie.project.bean.LoginBean;
 import com.movie.project.bean.MovieImgBean;
 import com.movie.project.bean.MovieListBean;
 import com.movie.project.bean.MovieWriteBean;
+import com.movie.project.bean.ScoreCntBean;
 import com.movie.project.bean.SearchBean;
 import com.movie.project.bean.SignUpBean;
 
@@ -197,6 +198,25 @@ public class MainController {
 		HashMap<String, Integer> countMap = md.infoCount(no);
 		req.setAttribute("countMap", countMap);
 		
+		//차트 Cnt
+		List<ScoreCntBean> scoreCnt = md.scoreChart(no);
+		HashMap<String, Integer> scoreMap = new HashMap<String, Integer>();
+
+		for(int j = 0; j < scoreCnt.size(); j++) { 
+			for(int i = 1 ; i < 6 ; i++) { 
+				if(scoreCnt.get(j).getScore() == i) {
+					scoreMap.put("score" + i, scoreCnt.get(j).getScoreCnt());
+					//System.out.println("score" + i + ":" + scoreMap.get("score" + i));
+				}
+				
+				if(scoreMap.get("score" + i) == null) {
+					scoreMap.put("score" + i, 0);
+				}
+			}
+		}
+		
+		req.setAttribute("scoreCnt", scoreMap);
+		
 		return "MovieInfo";
 	}
 	
@@ -226,13 +246,12 @@ public class MainController {
 		mwb.setNo(no);
 		type = "update"; 
 		md.MovieWrite(type, mwb, imgUrl);
-		System.out.println(mwb.getGenre1());
+
 		return "redirect:/MovieInfo/" + no;
 	}
 	
 	@RequestMapping("/comment")
 	public String comment(CommentInsertBean cib, Model m) {
-		System.out.println(nickname + "랑 " + userNo);
 		cib.setMovieNo(no);
 		cib.setUserNo(userNo);
 		md.commentInsert(cib);

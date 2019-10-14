@@ -1,3 +1,4 @@
+<%@page import="com.movie.project.bean.ScoreCntBean"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.movie.project.bean.CommentListBean"%>
 <%@page import="java.util.List"%>
@@ -17,12 +18,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="/resources/js/MovieInfo.js"></script>
 </head>
 <%
 	HashMap<String, Integer> countMap = (HashMap<String, Integer>)request.getAttribute("countMap");
 	int scoreCheck = (int) request.getAttribute("scoreCheck");
 	String nickname = (String)session.getAttribute("nickname");
+	HashMap<String, Integer> scoreCnt = (HashMap<String, Integer>) request.getAttribute("scoreCnt");
 %>
 <script>
 $(document).ready(function(){
@@ -53,6 +56,52 @@ $(document).ready(function(){
 		$('#movieUpdate').show();
 		$('#movieDelete').show();	
 	}
+	var ctx = document.getElementById("scoreChart").getContext('2d');
+
+	var scoreChart = new Chart(ctx, {
+	    type: 'horizontalBar',
+	    data: {
+	        labels: ['5점','4점','3점','2점','1점'],
+	        datasets: [{
+	        	label: '별점',
+	            data: [
+	            	<%=scoreCnt.get("score5")%>,
+	            	<%=scoreCnt.get("score4")%>,
+	            	<%=scoreCnt.get("score3")%>,
+	            	<%=scoreCnt.get("score2")%>,
+	            	<%=scoreCnt.get("score1")%>
+	            ],
+	            borderColor: "rgba(255, 201, 14, 1)",
+	            backgroundColor: "rgba(255, 201, 14, 0.5)",
+	        }]
+	    },
+	    options: {
+	    	scales: {
+	            xAxes: [{
+	            	ticks:{
+	                	beginAtZero: true,
+	                	display: false,
+	                	max: 10
+	            	},
+	            	gridLines: {
+	            		display: false
+	            	}
+	            }],
+	            yAxes: [{
+	            	gridLines: {
+	            		display: false
+	            	}
+	            }]
+	        },
+	        tooltips: {
+	        	callbacks: { 
+	        	     label: function(scoreChart) { 
+	        	      return Number(scoreChart.xLabel) + "명"; 
+	        	     }
+	        	} 
+	        }
+        }
+	});
 });
 </script>
 <body>
@@ -124,7 +173,14 @@ $(document).ready(function(){
                                         </div>
                                         <hr>
                                     </div>
-                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">  
+                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                    	<div class="chart">	
+                                    		<canvas id="scoreChart"></canvas>
+                                    	</div>
+										<div class="scoreText">
+											<span>평균</span>
+											<span>3.5</span>
+										</div>
                                     </div>
                                 </div>
                             </div>
