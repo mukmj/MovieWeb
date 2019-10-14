@@ -108,11 +108,14 @@ $(document).ready(function(){
 	//평점 평균
 	var scoreAvg = <%=scoreAvg%>;
 	var scoreAvg2 = <%=scoreAvgInt%>;
-	var result = scoreAvg2 - scoreAvg;
+	var result = scoreAvg - scoreAvg2;
+
+	if(scoreAvg != 0){
+		$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).addClass('on').prevAll('span').addClass('on');
+		$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).text("★").prevAll('span').text("★");
+	}
 	
-	$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).addClass('on').prevAll('span').addClass('on');
-	$('.scoreavgBox').children('span').eq(scoreAvg2 - 1).text("★").prevAll('span').text("★");
-	if(result != 0){
+	if(result == 0.5){
 		$('.scoreavgBox').children('span').eq(scoreAvg2).text("★");
 	}
 	

@@ -278,7 +278,7 @@ public class MainController {
 		cib.setUserNo(userNo);
 		type = "update";
 		md.commentDelUp(type, cib);
-		return "redirect:/MovieInfo" + no;
+		return "redirect:/MovieInfo/" + no;
 	}
 	
 	@RequestMapping("/titleCheck")

@@ -44,13 +44,13 @@
 	</select>
 	
 	<select id="titleCheck" parameterType="String" resultType="int">
-		SELECT no FROM movieWrite WHERE title_kor = #{title}
+		SELECT no FROM movieWrite WHERE title_kor = #{title} and delYn = 'N'
 	</select>
 	
 	<!-- 평점 차트 -->
 	<select id="scoreChart" resultType="com.movie.project.bean.ScoreCntBean" parameterType="int">
 		SELECT score, COUNT(score) scoreCnt FROM `comment`
-		WHERE movieNo = #{movieNo}
+		WHERE movieNo = #{movieNo} AND delYn = 'N'
 		GROUP BY score
 		HAVING (score = 1 OR score = 2 OR score = 3 OR score = 4 OR score = 5)
 	</select>
@@ -58,7 +58,7 @@
 	<!-- 평균 평점 -->
 	<select id="scoreAvg" parameterType="int" resultType="float">
 		SELECT round(AVG(score), 1) scoreAvg FROM `comment`
-		WHERE movieNo = #{movieNo}
+		WHERE movieNo = #{movieNo} AND delYn = 'N'
 	</select>
 	
 	<insert id="insert" parameterType="com.movie.project.bean.MovieWriteBean">

@@ -8,6 +8,7 @@
 		FROM movieWrite w
 		JOIN movieView v
 		ON w.no = v.movieNo
+		WHERE w.delYn = 'N'
 		GROUP BY v.movieNo
 		ORDER BY SUM(v.viewCount) desc
 		LIMIT 0, 10 
@@ -28,6 +29,7 @@
 		FROM movieWrite w
 		JOIN `comment` c
 		ON w.no = c.movieNo
+		WHERE w.delYn = 'N' AND c.delYn = 'N'
 		GROUP BY c.movieNo
 		ORDER BY round(avg(c.score), 1) DESC 
 		LIMIT 0, 10
@@ -38,6 +40,7 @@
 		FROM movieImg i
 		JOIN `comment` c
 		ON i.writeNo = c.movieNo
+		WHERE c.delYn = 'N'
 		GROUP BY c.movieNo
 		ORDER BY round(avg(c.score), 1) DESC 
 		LIMIT 0, 1

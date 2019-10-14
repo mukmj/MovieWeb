@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="commentCount" parameterType="int" resultType="int">
-		SELECT COUNT(*) FROM `comment` WHERE movieNo = #{movieNo}
+		SELECT COUNT(*) FROM `comment` WHERE movieNo = #{movieNo} AND delYn = 'N'
 	</select>
 	
 	<insert id="insert" parameterType="com.movie.project.bean.CommentInsertBean">

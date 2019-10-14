@@ -13,6 +13,7 @@
 <%String nickname = (String)session.getAttribute("nickname");%>
 <script>
 $(document).ready(function(){
+	$('header').load('/resources/header.html');
 	var nick = "<%=nickname%>";
 
 	$('#admin').hide();
@@ -32,8 +33,8 @@ $(document).ready(function(){
 });
 </script>
 <body>
-
     <header>
+	
     </header>
     <nav>
         <ul class="nav-logo">
