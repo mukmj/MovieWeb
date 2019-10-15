@@ -69,6 +69,9 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="cont">
+                
+                
+                
                     <div class="img-box-large">
                         <div class="img-box">
                             <img src=<%=path+viewImg%>>
