@@ -63,7 +63,7 @@ public class MainController {
 	
 	@RequestMapping(value="/signUp", method = RequestMethod.POST)
 	public String sighUp(HttpServletRequest req, @RequestParam("profileImg") MultipartFile file) {
-		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\profile\\";
+		String path = "D:\\Java\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\profile\\";
 		
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
@@ -71,7 +71,7 @@ public class MainController {
 		String profileImg = fud.fileUpload(file, path);
 		
 		if(profileImg.equals("")) {
-			profileImg = "none.png";
+			profileImg = "none.jpg";
 		}
 		
 		SignUpBean sb = new SignUpBean();
@@ -130,7 +130,7 @@ public class MainController {
 	
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest req, @RequestParam("MovieImg") MultipartFile file, MovieWriteBean mwb) {
-		String path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+		String path = "D:\\Java\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\movieImg\\";
 		String imgUrl = "";
 		if(file == null) {
 			imgUrl = "none.png";
@@ -246,7 +246,7 @@ public class MainController {
 		String path = "";
 		String imgUrl = "";
 		
-		path = "D:\\IDE\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
+		path = "D:\\Java\\httpd-2.4.41-win64-VS16\\Apache24\\htdocs\\MovieImg\\";
 		imgUrl = fud.fileUpload(file, path);
 	
 		mwb.setNo(no);
