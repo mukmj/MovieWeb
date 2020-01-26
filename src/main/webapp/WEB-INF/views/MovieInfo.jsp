@@ -51,13 +51,14 @@ $(document).ready(function(){
 		});
 	}
 	
-	$('#movieUpdate').hide();
-	$('#movieDelete').hide();
-	
-	if(nick == "admin"){
+	if(nick == "ADMIN"){
 		$('#movieUpdate').show();
 		$('#movieDelete').show();	
+	}else{
+		$('#movieUpdate').hide();
+		$('#movieDelete').hide();
 	}
+	
 	var ctx = document.getElementById("scoreChart").getContext('2d');
 
 	var scoreChart = new Chart(ctx, {
@@ -125,7 +126,7 @@ $(document).ready(function(){
     <div id="load"></div>
 <%
 	List<MovieWriteBean> mwList = (List<MovieWriteBean>) request.getAttribute("mwList");
-	String path = "http://192.168.3.40/MovieImg/";
+	String path = "http://192.168.0.2/MovieImg/";
 	String genre = "";
 	
 	if(mwList.get(0).getGenre2() != null){
@@ -228,10 +229,10 @@ $(document).ready(function(){
                             </div>                          
                             <div class="commentList">
 <%
-	String profilePath = "http://192.168.3.40/profile/";
+	String profilePath = "http://192.168.0.2/profile/";
 	List<CommentListBean> commentList = (List<CommentListBean>)request.getAttribute("commentList");
 	if(commentList != null){
-		for(int i = 0 ; i < commentList.size(); i++) {
+		for(int i = commentList.size() - 1 ; i >= 0; i--) {
 %>                            
 <script>
 $(document).ready(function(){

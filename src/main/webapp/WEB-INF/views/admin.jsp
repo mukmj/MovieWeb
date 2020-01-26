@@ -24,9 +24,6 @@
               <li class="nav-item" id="insert">
                   <a href="" class="nav-link" data-toggle="tab">영화 등록</a>
               </li>
-              <li class="nav-item" id="user">
-                  <a href="" class="nav-link" data-toggle="tab">회원 관리</a>
-              </li>
          </ul>
       </div>
 </div>
@@ -131,9 +128,6 @@
 	            </form>
 	    	</div>
 		</div>
-	</div>
-	<div id="userBox">
-		asd
 	</div>
 </div>
 </body>

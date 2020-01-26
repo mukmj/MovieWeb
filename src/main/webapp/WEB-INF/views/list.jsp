@@ -17,25 +17,98 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/js/list.js"></script>
    <%int movieCount = (int) request.getAttribute("movieCount"); %>
+<%
+	int count;
+	if(request.getParameter("count") != null){
+		count = Integer.parseInt(request.getParameter("count"));
+	}else{
+		count = 0; 
+	}
+%>
     <script>
-    	$(document).ready(function(){
-    		var tot = <%=movieCount%>;
-    		var listCount = 20;
-    		var pagingIndex = Math.ceil(tot / listCount);
-    		var count = 0;
-    		
-    		$('#pagingStart').empty();
-    		for(var i = 0; i < pagingIndex; i++){
-            	var html = "<span>"+(i + 1)+"</span>";
-    			$('#pagingStart').append(html);
-    		}
-    				
-    		$('#pagingStart span').click(function(){
-    			count = ($('#pagingStart span').index(this)) * listCount;
-  				console.log($('#pagingStart span').index(this));
-    			location.href =  "/list?&count=" + count;
-    		});		
-    	});
+    		$(document).ready(function(){	
+    			function currentPage(listCount){
+    				$('#pagingStart span').click(function(){
+	        			var countIndex = $('#pagingStart span').index(this);
+	        			var countPage = ($('#pagingStart span')[countIndex].textContent - 1) * listCount;
+	        			location.href = "/list?&count=" + countPage;
+	        		});
+    			}
+    			
+    			function pagingView(){
+    				var tot = <%=movieCount%>;
+	        		var listCount = 20;
+	        		var totalPage = Math.ceil(tot / listCount);
+	        		var block = 1;
+	        		var page = (<%=count%> / listCount) + 1;
+	     			var countPage = 0;
+	        		var startPage;
+	        		var endPage;
+	        		console.log("s: " + startPage + ", e: " + endPage);
+	        		
+	        		if(totalPage < block){
+	        			block = totalPage;
+	        			$('#next').hide();
+	        		}
+	       
+	        		if(totalPage <= page){
+	        			$('#next').hide();
+	        			$('#end').hide();
+	        		}
+	        		
+	        		startPage = parseInt((page - 1) / block) * block + 1;
+	        		endPage = startPage + block - 1;
+	        		
+	        		if(startPage > 1){
+	        			$('#prev').show();
+	        			$('#first').show();
+	        		}else{
+	        			$('#prev').hide();
+	        			$('#first').hide();
+	        		}
+	        		
+	        		paging(startPage, endPage);
+	        		currentPage(listCount);
+	        		
+	        		$('#first').click(function(e){
+	        			startPage = 1;
+	        			countPage = (startPage - 1) * listCount;
+	        			location.href = "/list?&count=" + countPage;
+	        		});
+	        		
+	        		$('#end').click(function(){
+	        			endPage = totalPage;
+	        			countPage = (endPage - 1) * listCount;
+	        			location.href = "/list?&count=" + countPage;
+	        		});
+	        		
+	        		$('#next').click(function(e){
+	        			startPage = endPage + 1;
+	        			endPage = startPage + block - 1;
+	        			paging(startPage, endPage);
+	        			countPage = (startPage - 1) * listCount;
+	        			location.href = "/list?&count=" + countPage;
+	    			});
+	        		
+	        		$('#prev').click(function(){
+	        			startPage = startPage - block;
+	        			endPage = startPage + block - 1;
+	        			paging(startPage, endPage);
+	        			countPage = (endPage - 1) * listCount;
+	        			location.href = "/list?&count=" + countPage;
+	        		});
+    			}
+    			
+    			function paging(startPage, endPage){
+    				$('#pagingStart').empty();
+	        		for(var i = startPage; i <= endPage; i++){
+	                	var html = "<span>"+ i +"</span>";
+	        			$('#pagingStart').append(html);
+	        		}		
+    			}
+
+    			pagingView();
+    		});
     </script>
 </head>
 <body>
@@ -80,7 +153,7 @@
                 <div class="row">
 <%
 	List<MovieListBean> movieList = (List<MovieListBean>) request.getAttribute("movieList");
-	String path = "http://192.168.3.40/MovieImg/";
+	String path = "http://192.168.0.2/MovieImg/";
 	if(movieList != null){
 		for(int i = 0; i < movieList.size(); i++){	
 %>            
@@ -97,9 +170,11 @@
 %>                 
                 </div>
                 <div id="paging">
-                	<span class="block">&laquo;</span>
+                	<span class="block" id="first">&laquo;</span>
+                	<span class="block" id="prev">&lt;</span>
                 	<span id="pagingStart"></span>
-                	<span class="block">&raquo;</span>
+                	<span class="block" id="next">&gt;</span>
+                	<span class="block" id="end">&raquo;</span>
             	</div>   
             </div>
         </div>

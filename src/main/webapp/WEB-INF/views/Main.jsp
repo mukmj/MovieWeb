@@ -55,7 +55,7 @@
 	List<ScoreRankBean> scoreList = (List<ScoreRankBean>)rankMap.get("scoreList");
 	String viewImg = (String)rankMap.get("viewImg");
 	String scoreImg =(String)rankMap.get("scoreImg");
-	String path = "http://192.168.3.40/MovieImg/";
+	String path = "http://192.168.0.2/MovieImg/";
 %>
     <div id="load"></div>
     <div class="bs-example">

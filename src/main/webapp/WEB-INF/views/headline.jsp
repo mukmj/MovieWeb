@@ -27,7 +27,7 @@ $(document).ready(function(){
 		$('#user').hide();
 	}
 	
-	if(nick == "admin"){
+	if(nick == "ADMIN"){
 		$('#admin').show();
 	}
 });
